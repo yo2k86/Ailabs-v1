@@ -94,7 +94,7 @@
                     <!-- Tombol Toggle Password Visibility -->
                     <button type="button" id="toggle-password" title="Tampilkan/Sembunyikan Password" class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-orange-400">
                         <!-- Icon Mata Tertutup (Eye Off) - default -->
-                        <svg id="eye-off-icon" xmlns="http://www.w.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-off">
+                        <svg id="eye-off-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-off">
                             <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 11 8 11 8a17.25 17.25 0 0 1-2.07 2.65M16.27 16.27A10.47 10.47 0 0 1 12 19c-7 0-11-8-11-8a18.5 18.5 0 0 1 4.26-5.73"/><path d="m2 2 20 20"/>
                         </svg>
                         <!-- Icon Mata Terbuka (Eye On) - tersembunyi -->
@@ -318,13 +318,19 @@
         const adminModalOverlay = document.getElementById('admin-modal-overlay');
 
 
-        // Cek apakah user sudah login sebelumnya (menggunakan sessionStorage)
+        // Cek apakah user sudah login sebelumnya (menggunakan localStorage untuk login "ingat saya")
         document.addEventListener('DOMContentLoaded', () => {
-            // Karena username selalu 'bangpro', kita bisa langsung menggunakan nilai tersebut.
-            const loggedInUser = sessionStorage.getItem('loggedInUser');
-            if (loggedInUser) {
-                showPortalPage(loggedInUser);
+            // DIUBAH: Kita cek "token" (yaitu password yang disimpan)
+            const sessionToken = localStorage.getItem('sessionToken');
+            
+            // Cek apakah token ada DAN apakah token itu masih valid (ada di database)
+            if (sessionToken && userDatabase['bangpro'].includes(sessionToken)) {
+                // Jika valid, tampilkan portal. 
+                // Kita bisa langsung pakai "bangpro" karena hanya itu user-nya.
+                showPortalPage("bangpro");
             }
+            // Jika token tidak ada, atau token tidak valid (sudah dihapus dari DB),
+            // maka tidak perlu melakukan apa-apa, halaman login akan tampil secara default.
         });
 
         // Fungsi untuk menampilkan halaman portal
@@ -336,7 +342,7 @@
 
         // Fungsi untuk menampilkan halaman login
         function showLoginPage() {
-            sessionStorage.removeItem('loggedInUser'); // Hapus sesi
+            localStorage.removeItem('sessionToken'); // DIUBAH // Hapus token sesi
             portalPage.classList.add('hidden'); // Sembunyikan portal
             loginPage.classList.remove('hidden'); // Tampilkan login
             // Username dihapus dari HTML, tidak perlu dikosongkan.
@@ -355,7 +361,7 @@
             // Cek ke 'database'
             if (userDatabase.hasOwnProperty(username) && userDatabase[username].includes(password)) {
                 // Jika BENAR
-                sessionStorage.setItem('loggedInUser', username); // Simpan sesi
+                localStorage.setItem('sessionToken', password); // DIUBAH // Simpan password sebagai token
                 showPortalPage(username);
             } else {
                 // Jika SALAH, hanya tampilkan error password
