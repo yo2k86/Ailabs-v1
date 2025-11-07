@@ -26,7 +26,10 @@
             background-color: rgba(10, 10, 10, 0.8); /* Hampir hitam, 80% opacity */
             backdrop-filter: blur(15px); /* Kunci efek tembus pandang elegan */
             -webkit-backdrop-filter: blur(15px); /* Untuk kompatibilitas Safari */
-            border: 1px solid rgba(255, 140, 0, 0.2); /* Border neon tipis */
+            border: 1px solid rgba(255, 140, 0, 0.2); /* Border neon tipis (Oranye) */
+            /* TAMBAHAN: Efek glow biru neon */
+            box-shadow: 0 0 15px rgba(0, 191, 255, 0.2), 
+                        0 0 25px rgba(0, 191, 255, 0.1);
         }
 
         /* Gaya untuk item aplikasi di dalam portal */
@@ -42,16 +45,16 @@
 
         /* Efek neon untuk tombol */
         .shadow-neon {
-            /* Oranye terang */
-            box-shadow: 0 0 8px rgba(255, 120, 0, 0.7),
-                        0 0 15px rgba(255, 100, 0, 0.5),
-                        0 0 25px rgba(255, 80, 0, 0.3);
+            /* Kombinasi Oranye dan Biru Neon */
+            box-shadow: 0 0 8px rgba(255, 120, 0, 0.7), /* Oranye */
+                        0 0 15px rgba(0, 191, 255, 0.5), /* Biru */
+                        0 0 25px rgba(255, 80, 0, 0.3); /* Oranye */
             transition: all 0.3s ease-in-out;
         }
         .shadow-neon:hover {
-            box-shadow: 0 0 12px rgba(255, 150, 0, 0.9),
-                        0 0 20px rgba(255, 130, 0, 0.7),
-                        0 0 35px rgba(255, 90, 0, 0.5);
+            box-shadow: 0 0 12px rgba(255, 150, 0, 0.9), /* Oranye */
+                        0 0 20px rgba(0, 191, 255, 0.7), /* Biru */
+                        0 0 35px rgba(255, 90, 0, 0.5);  /* Oranye */
         }
         /* Gaya untuk elemen input yang lebih gelap */
         .input-futuristic {
@@ -121,13 +124,16 @@
         <!-- Menggunakan frosted-card untuk efek tembus pandang -->
         <div class="frosted-card shadow-2xl rounded-2xl p-6 md:p-10">
             <div class="flex flex-col md:flex-row justify-between items-center mb-8">
-                <h1 class="text-3xl md:text-4xl font-bold text-orange-400 mb-4 md:mb-0">Selamat Datang, <span id="welcome-user" class="text-orange-300"></span>!</h1>
+                <h1 class="text-3xl md:text-4xl font-bold text-orange-400 mb-4 md:mb-0">Selamat Datang Member VIP!</h1>
                 <button id="logout-button"
                         class="bg-red-700 hover:bg-red-600 text-white font-bold py-2 px-5 rounded-lg transition duration-300 shadow-neon text-sm md:text-base">
                     Logout
                 </button>
             </div>
             
+            <!-- Teks kecil baru -->
+            <p class="text-sm text-gray-300 -mt-4 mb-8">Pastikan selalu memperpanjang langganan untuk terus mendapatkan update terbaru dari Bang Pro.</p>
+
             <p class="text-gray-400 mb-10 text-base md:text-lg">Jelajahi berbagai aplikasi AI pilihan Bang Pro di sini.</p>
             
             <!-- TEMPAT LINK APLIKASI BARU -->
@@ -180,6 +186,13 @@
                    class="block app-link-card hover:bg-gray-700 p-6 rounded-xl shadow-lg transition duration-300">
                     <h3 class="text-xl font-semibold mb-2 text-orange-400">Asisten bang pro</h3>
                     <p class="text-gray-400 text-sm">Asisten AI pribadi yang dirancang untuk membantu berbagai tugas harian.</p>
+                </a>
+
+                <!-- Ailabs Affiliate V1 (BARU DITAMBAHKAN) -->
+                <a href="https://gemini.google.com/share/d9800cca2fa0" target="_blank"
+                   class="block app-link-card hover:bg-gray-700 p-6 rounded-xl shadow-lg transition duration-300">
+                    <h3 class="text-xl font-semibold mb-2 text-orange-400">Ailabs Affiliate V1</h3>
+                    <p class="text-gray-400 text-sm">Program afiliasi untuk AIlabs by Bang Pro.</p>
                 </a>
 
                 <!-- Tambahkan link aplikasi lainnya di sini -->
@@ -290,8 +303,9 @@
                 "S8I1", "F4T0", "H2B6", "W9O4", "Z5U3",
                 "V1K8", "C3N7", "R6J2", "E9G4", "T5Q1",
                 "Y0F9", "B7P5", "I2X3", "K8A0", "O4L6",
-                "U3M7", "D9S2", "G5H1", "N0C8", "M1W4"
+                "U3M7", "D9S2", "G5H1", "N0C8", "M1W4",
                 // ------------------------------------------
+                "admin123" // Password baru ditambahkan
             ]
         };
         // =================================================================
@@ -303,7 +317,7 @@
         const loginForm = document.getElementById('login-form');
         const logoutButton = document.getElementById('logout-button');
         const errorMessage = document.getElementById('error-message');
-        const welcomeUser = document.getElementById('welcome-user');
+        // const welcomeUser = document.getElementById('welcome-user'); // Dihapus
         
         // Elemen Password Toggle
         const passwordInput = document.getElementById('password');
@@ -335,7 +349,7 @@
 
         // Fungsi untuk menampilkan halaman portal
         function showPortalPage(username) {
-            welcomeUser.textContent = username; // Tampilkan nama user
+            // welcomeUser.textContent = username; // Tampilkan nama user // Dihapus
             loginPage.classList.add('hidden'); // Sembunyikan login
             portalPage.classList.remove('hidden'); // Tampilkan portal
         }
@@ -409,5 +423,3 @@
     </script>
 </body>
 </html>
-
-
