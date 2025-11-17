@@ -35,12 +35,34 @@
         /* Gaya untuk item aplikasi di dalam portal */
         .app-link-card {
             background-color: rgba(26, 32, 44, 0.6); /* Gray 900 dengan 60% opacity */
-            border: 1px solid rgba(45, 55, 72, 0.5); /* Border abu-abu transparan */
+            
+            /* --- PERUBAHAN DI SINI --- */
+            /* Border diubah ke biru neon tipis */
+            border: 1px solid rgba(0, 191, 255, 0.2); 
             transition: all 0.3s ease-in-out;
+            /* Bayangan biru neon tipis ditambahkan */
+            box-shadow: 0 0 10px rgba(0, 191, 255, 0.2),
+                        0 0 15px rgba(0, 191, 255, 0.1);
+            /* --- AKHIR PERUBAHAN --- */
         }
         .app-link-card:hover {
             background-color: rgba(26, 32, 44, 0.8);
+            
+            /* --- PERUBAHAN DI SINI --- */
             border-color: #FF8C00; /* Border oranye saat hover */
+            /* Shadow diubah ke oranye neon saat hover */
+            box-shadow: 0 0 15px rgba(255, 140, 0, 0.5),
+                        0 0 20px rgba(255, 140, 0, 0.3);
+            /* --- AKHIR PERUBAHAN --- */
+        }
+
+        /* TAMBAHAN BARU: Glow biru neon HANYA untuk portal */
+        .portal-glow {
+            border-color: rgba(0, 191, 255, 0.3); /* Border biru neon tipis */
+            /* Bayangan neon biru yang lebih kuat, menggantikan shadow bawaan .frosted-card */
+            box-shadow: 0 0 20px rgba(0, 191, 255, 0.4), 
+                        0 0 35px rgba(0, 191, 255, 0.2),
+                        0 0 15px rgba(255, 140, 0, 0.1); /* Sedikit sisa oranye untuk kedalaman */
         }
 
         /* Efek neon untuk tombol */
@@ -121,8 +143,8 @@
 
     <!-- 2. HALAMAN PORTAL (TERSEMBUNYI, MUNCUL SETELAH LOGIN) -->
     <div id="portal-page" class="w-full max-w-5xl p-4 hidden">
-        <!-- Menggunakan frosted-card untuk efek tembus pandang -->
-        <div class="frosted-card shadow-2xl rounded-2xl p-6 md:p-10">
+        <!-- Menggunakan frosted-card untuk efek tembus pandang + DITAMBAHKAN portal-glow -->
+        <div class="frosted-card portal-glow shadow-2xl rounded-2xl p-6 md:p-10">
             <div class="flex flex-col md:flex-row justify-between items-center mb-8">
                 <h1 class="text-3xl md:text-4xl font-bold text-orange-400 mb-4 md:mb-0">Selamat Datang Member VIP!</h1>
                 <button id="logout-button"
@@ -217,6 +239,16 @@
                     <p class="text-gray-400 text-sm">Aplikasi terbaru di ekosistem Ailabs.</p>
                 </a>
 
+                <!-- Ailabs suite v3 (BARU DITAMBAHKAN SESUAI PERMINTAAN) -->
+                <a href="https://gemini.google.com/share/1016ed3e1636" target="_blank"
+                   class="block app-link-card hover:bg-gray-700 p-6 rounded-xl shadow-lg transition duration-300 border-orange-500">
+                    <h3 class="flex justify-between items-center text-xl font-semibold mb-2 text-orange-400">
+                        <span>Ailabs suite v3</span>
+                        <span class="text-xs bg-green-500 text-white font-bold px-2 py-0.5 rounded-full">BARU</span>
+                    </h3>
+                    <p class="text-gray-400 text-sm">Versi terbaru dari Ailabs suite.</p>
+                </a>
+                
                 <!-- Tambahkan link aplikasi lainnya di sini -->
             </div>
         </div>
