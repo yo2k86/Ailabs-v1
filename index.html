@@ -3,477 +3,559 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AIlabs by Bang Pro - Portal Aplikasi AI</title>
-    <!-- Memakai Tailwind CSS untuk styling cepat -->
+    <title>AIlabs by Bang Pro - VIP Prime Access</title>
+    <!-- Memakai Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Inter & Orbitron untuk kesan tech -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        tech: ['Orbitron', 'sans-serif'],
+                    },
+                    colors: {
+                        neonBlue: '#00f3ff',
+                        neonOrange: '#FF8C00',
+                        deepDark: '#050507',
+                    },
+                    animation: {
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'glow-pulse': 'glowPulse 2s infinite',
+                    },
+                    keyframes: {
+                        glowPulse: {
+                            '0%, 100%': { boxShadow: '0 0 10px #00f3ff' },
+                            '50%': { boxShadow: '0 0 25px #00f3ff', backgroundColor: 'rgba(0, 243, 255, 0.2)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        /* Font default Inter */
         body {
-            font-family: 'Inter', sans-serif;
-            /* Latar belakang yang lebih gelap untuk kesan futuristik (sebagai fallback) */
-            background-color: #0A0A0A; /* Hampir hitam */
-            
-            /* PERUBAHAN: Menggunakan foto-profil.png sebagai background full screen */
-            background-image: url('./foto-profil.png');
+            background-color: #020204;
+            /* MENGGUNAKAN FOTO PROFIL SESUAI PERMINTAAN */
+            background-image: url('./foto-profil.png'); 
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            background-attachment: fixed; /* Biar gambar diam saat di-scroll (jika halaman panjang) */
+            background-attachment: fixed;
+            overflow-x: hidden;
         }
 
-        /* Gaya untuk kartu transparan dengan efek blur (Frosted Glass) */
-        .frosted-card {
-            background-color: rgba(10, 10, 10, 0.8); /* Hampir hitam, 80% opacity */
-            backdrop-filter: blur(15px); /* Kunci efek tembus pandang elegan */
-            -webkit-backdrop-filter: blur(15px); /* Untuk kompatibilitas Safari */
-            border: 1px solid rgba(255, 140, 0, 0.2); /* Border neon tipis (Oranye) */
-            /* TAMBAHAN: Efek glow biru neon */
-            box-shadow: 0 0 15px rgba(0, 191, 255, 0.2), 
-                        0 0 25px rgba(0, 191, 255, 0.1);
+        /* Overlay Gradient - High Contrast */
+        /* Ini hanya lapisan warna transparan di atas foto agar teks terbaca jelas */
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(0, 243, 255, 0.25) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(255, 140, 0, 0.2) 0%, transparent 40%),
+                rgba(5, 5, 8, 0.85); /* Transparansi gelap agar foto profil tetap terlihat samar di belakang */
+            backdrop-filter: blur(5px);
+            z-index: -1;
         }
 
-        /* Gaya untuk item aplikasi di dalam portal */
-        .app-link-card {
-            background-color: rgba(26, 32, 44, 0.6); /* Gray 900 dengan 60% opacity */
-            
-            /* --- PERUBAHAN DI SINI --- */
-            /* Border diubah ke biru neon tipis */
-            border: 1px solid rgba(0, 191, 255, 0.2); 
-            transition: all 0.3s ease-in-out;
-            /* Bayangan biru neon tipis ditambahkan */
-            box-shadow: 0 0 10px rgba(0, 191, 255, 0.2),
-                        0 0 15px rgba(0, 191, 255, 0.1);
-            /* --- AKHIR PERUBAHAN --- */
-        }
-        .app-link-card:hover {
-            background-color: rgba(26, 32, 44, 0.8);
-            
-            /* --- PERUBAHAN DI SINI --- */
-            border-color: #FF8C00; /* Border oranye saat hover */
-            /* Shadow diubah ke oranye neon saat hover */
-            box-shadow: 0 0 15px rgba(255, 140, 0, 0.5),
-                        0 0 20px rgba(255, 140, 0, 0.3);
-            /* --- AKHIR PERUBAHAN --- */
+        /* Kartu Kaca Premium dengan Border Mix */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(0, 243, 255, 0.4);
+            border-bottom: 1px solid rgba(255, 140, 0, 0.1);
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
         }
 
-        /* TAMBAHAN BARU: Glow biru neon HANYA untuk portal */
-        .portal-glow {
-            border-color: rgba(0, 191, 255, 0.3); /* Border biru neon tipis */
-            /* Bayangan neon biru yang lebih kuat, menggantikan shadow bawaan .frosted-card */
-            box-shadow: 0 0 20px rgba(0, 191, 255, 0.4), 
-                        0 0 35px rgba(0, 191, 255, 0.2),
-                        0 0 15px rgba(255, 140, 0, 0.1); /* Sedikit sisa oranye untuk kedalaman */
+        /* Info Box Footer Style */
+        .info-box {
+            background: linear-gradient(90deg, rgba(0, 243, 255, 0.03) 0%, rgba(255, 140, 0, 0.01) 100%);
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-left: none; /* Ganti border kiri dengan elemen pseudo */
+            overflow: hidden;
+        }
+        /* Aksen Vertikal Kiri: Gradasi Oranye ke Cyan */
+        .info-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, #FF8C00, #00f3ff);
         }
 
-        /* Efek neon untuk tombol */
-        .shadow-neon {
-            /* Kombinasi Oranye dan Biru Neon */
-            box-shadow: 0 0 8px rgba(255, 120, 0, 0.7), /* Oranye */
-                        0 0 15px rgba(0, 191, 255, 0.5), /* Biru */
-                        0 0 25px rgba(255, 80, 0, 0.3); /* Oranye */
-            transition: all 0.3s ease-in-out;
+        /* Efek Kartu Aplikasi */
+        .app-card {
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.6) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(0, 243, 255, 0.2); 
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
         }
-        .shadow-neon:hover {
-            box-shadow: 0 0 12px rgba(255, 150, 0, 0.9), /* Oranye */
-                        0 0 20px rgba(0, 191, 255, 0.7), /* Biru */
-                        0 0 35px rgba(255, 90, 0, 0.5);  /* Oranye */
+
+        .app-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: rgba(0, 243, 255, 0.6);
+            border-bottom-color: #FF8C00; 
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.95) 100%);
+            box-shadow: 
+                0 0 25px rgba(0, 243, 255, 0.25), 
+                0 10px 20px rgba(0, 0, 0, 0.5);
         }
-        /* Gaya untuk elemen input yang lebih gelap */
-        .input-futuristic {
-            background-color: #1A1A1A; /* Abu-abu gelap */
-            border-color: #333333; /* Border abu-abu */
-            color: #E0E0E0; /* Teks terang */
+
+        /* Efek Shine Garis */
+        .app-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #00f3ff, #FF8C00, transparent);
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.5s ease;
         }
-        .input-futuristic:focus {
-            border-color: #FF8C00; /* Border oranye saat fokus */
-            box-shadow: 0 0 0 2px rgba(255, 140, 0, 0.5); /* Ring oranye saat fokus */
+        .app-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* Input Field Tech Style */
+        .input-tech {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            color: #00f3ff;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        .input-tech:focus {
+            background: rgba(0, 243, 255, 0.08);
+            border-color: #FF8C00; 
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.2), 0 0 5px rgba(255, 140, 0, 0.4);
+            outline: none;
+        }
+
+        /* Tombol Cyber Dual Color */
+        .btn-cyber {
+            background: transparent;
+            border: 1px solid #00f3ff;
+            color: #00f3ff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Orbitron', sans-serif;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.15);
+        }
+        .btn-cyber:hover {
+            border-color: #FF8C00;
+            color: #FF8C00;
+            background: rgba(255, 140, 0, 0.1);
+            box-shadow: 0 0 25px rgba(255, 140, 0, 0.4);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #020204;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #00f3ff, #FF8C00);
+            border-radius: 3px;
         }
     </style>
 </head>
-<body class="text-white min-h-screen flex items-center justify-center p-4">
+<body class="text-gray-200 min-h-screen flex items-center justify-center p-4 selection:bg-neonBlue selection:text-black">
 
-    <!-- TAMBAHAN: Logo Situs (Selalu Tampil) -->
-    <!-- Menggunakan path './logo.png' sesuai instruksi folder -->
+    <!-- Overlay -->
+    <div class="bg-overlay"></div>
+
+    <!-- Logo -->
     <img src="./logo.png" alt="Logo AIlabs" 
-         class="fixed top-5 right-5 w-20 h-auto z-50 opacity-90">
+         class="fixed top-8 right-8 w-16 h-auto z-50 opacity-90 hover:opacity-100 transition-opacity duration-300 filter drop-shadow-[0_0_15px_rgba(0,243,255,0.6)]">
 
-    <!-- 1. HALAMAN LOGIN (MUNCUL PERTAMA) -->
-    <div id="login-page" class="w-full max-w-md">
-        <!-- Menggunakan frosted-card untuk efek tembus pandang -->
-        <form id="login-form" class="frosted-card shadow-2xl rounded-2xl p-10">
-            <h1 class="text-4xl font-extrabold text-center mb-3 text-orange-400">AIlabs</h1>
-            <h2 class="text-2xl font-bold text-center mb-8 text-gray-200">by Bang Pro</h2>
+    <!-- 1. LOGIN PAGE -->
+    <div id="login-page" class="w-full max-w-md relative z-10">
+        <form id="login-form" class="glass-panel rounded-2xl p-10">
+            <div class="text-center mb-12">
+                <h1 class="text-5xl font-tech font-bold text-white mb-3 tracking-wider">
+                    <span class="text-neonOrange drop-shadow-[0_0_10px_rgba(255,140,0,0.8)]">AI</span><span class="text-white">LABS</span>
+                </h1>
+                <div class="h-1 w-32 bg-gradient-to-r from-transparent via-neonBlue to-transparent mx-auto mb-3"></div>
+                <p class="text-neonBlue text-xs font-bold tracking-[0.25em] uppercase drop-shadow-[0_0_5px_#00f3ff]">VIP Prime Access</p>
+            </div>
             
-            <!-- Pemberitahuan Username Tetap -->
-            <p class="text-sm text-center text-gray-400 mb-5">
-                Masuk sebagai <span class="font-bold text-orange-400">bangpro</span>
-            </p>
+            <div class="mb-8">
+                <p class="text-[10px] text-neonBlue uppercase tracking-widest mb-2 ml-1">User ID</p>
+                <div class="bg-black/40 border border-neonBlue/30 rounded-lg p-3 flex items-center justify-between shadow-[0_0_10px_rgba(0,243,255,0.1)]">
+                    <span class="font-mono text-white font-bold tracking-wide text-lg">bangpro</span>
+                    <div class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_10px_#22c55e]"></div>
+                </div>
+            </div>
             
-            <!-- Tempat Password (DENGAN TOMBOL MATA) -->
-            <div class="mb-7">
-                <label for="password" class="block text-sm font-medium text-gray-300 mb-2">Password</label>
-                <div class="relative">
-                    <input type="password" id="password" name="password" required
-                           class="w-full p-3 pr-10 input-futuristic rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
-                    
-                    <!-- Tombol Toggle Password Visibility -->
-                    <button type="button" id="toggle-password" title="Tampilkan/Sembunyikan Password" class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-orange-400">
-                        <!-- Icon Mata Tertutup (Eye Off) - default -->
-                        <svg id="eye-off-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-off">
-                            <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 11 8 11 8a17.25 17.25 0 0 1-2.07 2.65M16.27 16.27A10.47 10.47 0 0 1 12 19c-7 0-11-8-11-8a18.5 18.5 0 0 1 4.26-5.73"/><path d="m2 2 20 20"/>
-                        </svg>
-                        <!-- Icon Mata Terbuka (Eye On) - tersembunyi -->
-                        <svg id="eye-on-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye hidden">
-                            <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>
-                        </svg>
+            <div class="mb-10">
+                <label for="password" class="block text-[10px] text-neonOrange uppercase tracking-widest mb-2 ml-1">Security Token</label>
+                <div class="relative group">
+                    <input type="password" id="password" name="password" placeholder="ENTER CODE" required
+                           class="w-full p-4 pr-12 input-tech rounded-lg text-center text-xl font-tech tracking-widest">
+                    <button type="button" id="toggle-password" class="absolute inset-y-0 right-0 flex items-center pr-4 text-neonBlue/70 hover:text-neonOrange transition-colors">
+                        <svg id="eye-off-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 11 8 11 8a17.25 17.25 0 0 1-2.07 2.65M16.27 16.27A10.47 10.47 0 0 1 12 19c-7 0-11-8-11-8a18.5 18.5 0 0 1 4.26-5.73"/><path d="m2 2 20 20"/></svg>
+                        <svg id="eye-on-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
                     </button>
                 </div>
             </div>
             
-            <!-- Tombol Login -->
-            <button type="submit"
-                    class="w-full bg-orange-600 hover:bg-orange-500 text-white font-bold p-3 rounded-lg transition duration-300 shadow-neon">
-                Masuk ke AIlabs
+            <button type="submit" class="w-full btn-cyber py-4 rounded-lg font-bold text-lg tracking-wider">
+                Initialize
             </button>
-            
-            <!-- Pesan Error (muncul jika salah) -->
-            <p id="error-message" class="text-red-500 text-center mt-4 text-sm"></p>
+            <p id="error-message" class="text-red-500 text-center mt-6 text-xs font-mono min-h-[20px]"></p>
         </form>
     </div>
 
-    <!-- 2. HALAMAN PORTAL (TERSEMBUNYI, MUNCUL SETELAH LOGIN) -->
-    <div id="portal-page" class="w-full max-w-5xl p-4 hidden">
-        <!-- Menggunakan frosted-card untuk efek tembus pandang + DITAMBAHKAN portal-glow -->
-        <div class="frosted-card portal-glow shadow-2xl rounded-2xl p-6 md:p-10">
-            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
-                <h1 class="text-3xl md:text-4xl font-bold text-orange-400 mb-4 md:mb-0">Selamat Datang Member VIP!</h1>
-                <button id="logout-button"
-                        class="bg-red-700 hover:bg-red-600 text-white font-bold py-2 px-5 rounded-lg transition duration-300 shadow-neon text-sm md:text-base">
-                    Logout
-                </button>
-            </div>
+    <!-- 2. PORTAL DASHBOARD -->
+    <div id="portal-page" class="w-full max-w-7xl p-4 hidden relative z-10">
+        <div class="glass-panel rounded-3xl p-6 md:p-10">
             
-            <!-- Teks kecil baru -->
-            <p class="text-sm text-gray-300 -mt-4 mb-8">Pastikan selalu memperpanjang langganan untuk terus mendapatkan update terbaru dari Bang Pro.</p>
-
-            <p class="text-gray-400 mb-10 text-base md:text-lg">Jelajahi berbagai aplikasi AI pilihan Bang Pro di sini.</p>
-            
-            <!-- TEMPAT LINK APLIKASI BARU -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            <!-- HEADER: Selamat Datang & Intro -->
+            <div class="mb-10 border-b border-white/10 pb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+                <div class="max-w-3xl">
+                    <h1 class="text-2xl md:text-4xl font-bold text-white tracking-tight font-tech mb-4 leading-tight">
+                        <span class="text-neonOrange drop-shadow-[0_0_15px_rgba(255,140,0,0.8)]">✨ Selamat Datang Member</span> <br class="hidden md:block">
+                        <span class="text-neonOrange">AILABS</span> 
+                        <span class="text-neonBlue drop-shadow-[0_0_10px_rgba(0,243,255,0.8)]">VIP Prime Access</span>
+                    </h1>
+                    <p class="text-gray-300 text-base md:text-lg leading-relaxed border-l-2 border-neonBlue pl-4">
+                        Terima kasih telah bergabung sebagai member eksklusif. Kini Anda mendapatkan akses prioritas ke fitur premium, cinematic prompt assist, template khusus, dan experimental tools yang tidak tersedia untuk pengguna biasa.
+                    </p>
+                </div>
                 
-                <!-- Ailabs versi 1 -->
-                <a href="https://gemini.google.com/share/eed4e9937fb9" target="_blank"
-                   class="block app-link-card hover:bg-gray-700 p-6 rounded-xl shadow-lg transition duration-300">
-                    <h3 class="text-xl font-semibold mb-2 text-orange-400">Ailabs versi 1</h3>
-                    <p class="text-gray-400 text-sm">Aplikasi utama AIlabs, siap untuk pengembangan lebih lanjut.</p>
-                </a>
-
-                <!-- Ailabs versi 2 -->
-                <a href="https://gemini.google.com/share/1ecc7240fb7a" target="_blank"
-                   class="block app-link-card hover:bg-gray-700 p-6 rounded-xl shadow-lg transition duration-300">
-                    <h3 class="text-xl font-semibold mb-2 text-orange-400">Ailabs versi 2</h3>
-                    <p class="text-gray-400 text-sm">Versi pembaruan dari aplikasi AIlabs dengan fitur-fitur baru.</p>
-                </a>
-                
-                <!-- Ailabs Prompt Transformer versi 1 -->
-                <a href="https://gemini.google.com/share/6a35693cefd1" target="_blank"
-                   class="block app-link-card hover:bg-gray-700 p-6 rounded-xl shadow-lg transition duration-300">
-                    <h3 class="text-xl font-semibold mb-2 text-orange-400">Ailabs Prompt Transformer versi 1</h3>
-                    <p class="text-gray-400 text-sm">Alat untuk menyempurnakan dan mengubah prompt untuk model AI generatif.</p>
-                </a>
-                
-                <!-- AIlabs Voice Over -->
-                <a href="https://gemini.google.com/share/b3fe8cfbcae5" target="_blank"
-                   class="block app-link-card hover:bg-gray-700 p-6 rounded-xl shadow-lg transition duration-300">
-                    <h3 class="text-xl font-semibold mb-2 text-orange-400">AIlabs Voice Over</h3>
-                    <p class="text-gray-400 text-sm">Hasilkan sulih suara (voice over) profesional menggunakan teknologi AI.</p>
-                </a>
-
-                <!-- Ailabs Efek Prompt -->
-                <a href="https://g.co/gemini/share/ddfcd83d75e4" target="_blank"
-                   class="block app-link-card hover:bg-gray-700 p-6 rounded-xl shadow-lg transition duration-300">
-                    <h3 class="text-xl font-semibold mb-2 text-orange-400">Ailabs Efek Prompt</h3>
-                    <p class="text-gray-400 text-sm">Tambahkan berbagai efek visual atau gaya ke prompt gambar/teks Anda.</p>
-                </a>
-                
-                <!-- Ailabs Pose -->
-                <a href="https://gemini.google.com/share/210f872b73ca" target="_blank"
-                   class="block app-link-card hover:bg-gray-700 p-6 rounded-xl shadow-lg transition duration-300">
-                    <h3 class="text-xl font-semibold mb-2 text-orange-400">Ailabs Pose</h3>
-                    <p class="text-gray-400 text-sm">Fitur kontrol pose canggih untuk menghasilkan gambar dengan posisi yang presisi.</p>
-                </a>
-                
-                <!-- Asisten bang pro -->
-                <a href="https://gemini.google.com/share/bdd057d246d0" target="_blank"
-                   class="block app-link-card hover:bg-gray-700 p-6 rounded-xl shadow-lg transition duration-300">
-                    <h3 class="text-xl font-semibold mb-2 text-orange-400">Asisten bang pro</h3>
-                    <p class="text-gray-400 text-sm">Asisten AI pribadi yang dirancang untuk membantu berbagai tugas harian.</p>
-                </a>
-
-                <!-- Ailabs Affiliate V1 (BARU DITAMBAHKAN) -->
-                <a href="https://gemini.google.com/share/d9800cca2fa0" target="_blank"
-                   class="block app-link-card hover:bg-gray-700 p-6 rounded-xl shadow-lg transition duration-300">
-                    <h3 class="text-xl font-semibold mb-2 text-orange-400">Ailabs Affiliate V1</h3>
-                    <p class="text-gray-400 text-sm">Program afiliasi untuk AIlabs by Bang Pro.</p>
-                </a>
-
-                <!-- Ai labs cartoon (LINK TELAH DIRUBAH) -->
-                <a href="https://gemini.google.com/share/d736449f3fa3" target="_blank"
-                   class="block app-link-card hover:bg-gray-700 p-6 rounded-xl shadow-lg transition duration-300">
-                    <h3 class="text-xl font-semibold mb-2 text-orange-400">Ai labs cartoon</h3>
-                    <p class="text-gray-400 text-sm">Aplikasi baru untuk membuat efek kartun dengan AI.</p>
-                </a>
-
-                <!-- Website Free Member (BARU DITAMBAHKAN) -->
-                <!-- Ganti URL placeholder ini (#) dengan link yang benar jika sudah ada -->
-                <a href="https://websitebangpro.vercel.app/" target="_blank"
-                   class="block app-link-card hover:bg-gray-700 p-6 rounded-xl shadow-lg transition duration-300">
-                    <h3 class="text-xl font-semibold mb-2 text-orange-400">Website Free Member</h3>
-                    <p class="text-gray-400 text-sm">Akses ke website khusus member gratis.</p>
-                </a>
-
-                <!-- Ailabs flux (BARU DITAMBAHKAN SESUAI PERMINTAAN) -->
-                <a href="https://gemini.google.com/share/172e691c4663" target="_blank"
-                   class="block app-link-card hover:bg-gray-700 p-6 rounded-xl shadow-lg transition duration-300">
-                    <h3 class="text-xl font-semibold mb-2 text-orange-400">Ailabs flux</h3>
-                    <p class="text-gray-400 text-sm">Aplikasi terbaru di ekosistem Ailabs.</p>
-                </a>
-
-                <!-- Ailabs suite v3 (BARU DITAMBAHKAN SESUAI PERMINTAAN) -->
-                <a href="https://gemini.google.com/share/1016ed3e1636" target="_blank"
-                   class="block app-link-card hover:bg-gray-700 p-6 rounded-xl shadow-lg transition duration-300 border-orange-500">
-                    <h3 class="flex justify-between items-center text-xl font-semibold mb-2 text-orange-400">
-                        <span>Ailabs suite v3</span>
-                        <span class="text-xs bg-green-500 text-white font-bold px-2 py-0.5 rounded-full">BARU</span>
-                    </h3>
-                    <p class="text-gray-400 text-sm">Versi terbaru dari Ailabs suite.</p>
-                </a>
-                
-                <!-- Tambahkan link aplikasi lainnya di sini -->
-            </div>
-        </div>
-    </div>
-
-    <!-- 3. TOMBOL BANTUAN ADMIN (FLOATING) -->
-    <button id="admin-help-button" title="Hubungi Admin" 
-            class="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-400 text-white rounded-full p-4 shadow-lg transition duration-300 shadow-neon">
-        <!-- Ikon WhatsApp SVG -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" class="lucide lucide-message-circle">
-            <!-- Ini adalah path SVG untuk logo WhatsApp -->
-            <path d="M12.04 2C6.58 2 2.13 6.17 2.03 11.6c-.05 2.67.93 5.16 2.68 7.02l-.5 4.34 4.54-.95c1.78.8 3.79 1.25 5.86 1.25 5.46 0 9.91-4.17 10.01-9.6.1-5.42-4.27-9.8-9.8-9.8ZM17.3 14.85c-.2.12-.73.36-1.07.42-.33.06-.57.1-.83-.1-.26-.18-1.07-.4-2.04-1.25-.97-.83-1.63-1.85-1.87-2.17-.24-.31-.01-.48.18-.64s.39-.47.57-.7c.18-.22.24-.37.36-.62.12-.24.06-.45-.03-.57-.09-.13-.83-1.98-1.14-2.7-.3-.7-.6-.6-.82-.6-.2-.02-.43-.02-.66-.02-.23 0-.6.1-.9.48-.3.37-1.15 1.1-1.15 2.68s1.18 3.1 1.33 3.3c.15.2 2.33 3.5 5.6 4.9.75.33 1.34.4 1.8.52.44.1.84.07 1.16-.08.35-.17 1.07-.43 1.28-.85.21-.4 2.1-.4 2.1-.4Z"/>
-        </svg>
-    </button>
-
-    <!-- 4. MODAL BANTUAN ADMIN (TERSEMBUNYI) -->
-    <div id="admin-help-modal" class="hidden fixed inset-0 z-[60]">
-        <!-- Overlay -->
-        <div id="admin-modal-overlay" class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
-        
-        <!-- Konten Modal -->
-        <div class="relative z-10 w-full max-w-lg p-4 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <div class="frosted-card rounded-2xl shadow-2xl p-6">
-                <!-- Header Modal -->
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-2xl font-bold text-orange-400">Hubungi Admin Bantuan</h3>
-                    <button id="close-admin-modal" title="Tutup" class="text-gray-400 hover:text-white transition duration-200">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x">
-                            <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
-                        </svg>
+                <!-- Status Badge & Logout -->
+                <div class="flex flex-row md:flex-col items-center md:items-end gap-4 w-full md:w-auto justify-between md:justify-end">
+                     <div class="text-left md:text-right">
+                         <span class="text-[10px] uppercase tracking-widest text-gray-500 block mb-1">Account Status</span>
+                         <span class="text-neonBlue font-tech text-xl drop-shadow-[0_0_5px_#00f3ff]">ACTIVE PRIME</span>
+                     </div>
+                     <!-- Tombol Logout -->
+                     <button id="logout-button"
+                            class="border border-red-500/40 text-red-400 hover:bg-red-500/10 hover:border-red-500 hover:text-red-200 hover:shadow-[0_0_20px_rgba(239,68,68,0.4)] px-6 py-2 rounded-full text-[10px] md:text-xs font-bold transition-all duration-300 uppercase tracking-wider whitespace-nowrap flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+                        Log Out
                     </button>
                 </div>
+            </div>
+
+            <!-- GRID APLIKASI (Utama) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
                 
-                <!-- Daftar Admin -->
-                <p class="text-gray-400 mb-6">Silakan pilih salah satu admin di bawah ini untuk memulai obrolan via WhatsApp.</p>
-                <div class="space-y-3">
-                    <!-- Admin 1: wiwik apriyati -->
-                    <a href="https://wa.me/6281274038300" target="_blank" rel="noopener noreferrer"
-                       class="flex items-center space-x-4 p-4 rounded-lg app-link-card transition duration-200">
-                        <span class="text-2xl">?????</span>
-                        <div>
-                            <p class="font-semibold text-white">wiwik apriyati</p>
-                            <p class="text-sm text-green-400">+62 812-7403-8300</p>
+                <!-- 1. Suite V3 (PALING ATAS) -->
+                <a href="https://gemini.google.com/share/1016ed3e1636" target="_blank"
+                   class="block app-card p-6 rounded-2xl group">
+                    <div class="mb-4 text-neonOrange group-hover:scale-110 transition-transform origin-left drop-shadow-[0_0_5px_rgba(255,140,0,0.5)]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+                    </div>
+                    <div class="flex justify-between items-center mb-1">
+                        <h3 class="text-lg font-bold text-white group-hover:text-neonBlue transition-colors">AIlabs Suite V3</h3>
+                        <span class="text-[9px] bg-gray-800 text-gray-400 px-1.5 py-0.5 rounded border border-gray-700">UPDATED</span>
+                    </div>
+                    <p class="text-xs text-gray-500">All-in-one toolkit.</p>
+                </a>
+
+                <!-- 2. Remix Prompt (NEW & GLOWING) -->
+                <a href="https://gemini.google.com/share/0e8e26df42ff" target="_blank"
+                   class="block app-card p-6 rounded-2xl group relative overflow-hidden">
+                    <!-- Efek Glow Berdenyut -->
+                    <div class="absolute inset-0 bg-neonBlue/5 animate-pulse-fast"></div>
+                    
+                    <!-- Badge NEW & GLOWING -->
+                    <div class="absolute top-3 right-3">
+                        <span class="text-[10px] bg-neonBlue text-black font-bold px-2 py-0.5 rounded shadow-[0_0_15px_#00f3ff] animate-glow-pulse">NEW UPDATE</span>
+                    </div>
+
+                    <div class="mb-4 p-2 w-fit rounded-md bg-blue-900/20 text-neonBlue border border-neonBlue/20 relative z-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-1 group-hover:text-neonBlue transition-colors relative z-10">AIlabs Remix Prompt <span class="text-neonBlue text-xs align-top ml-1">NEW</span></h3>
+                    <p class="text-xs text-gray-400 group-hover:text-gray-200 relative z-10">Prompt variation engine.</p>
+                </a>
+
+                <!-- 3. FLUX V2 (Featured Big Card) -->
+                <a href="https://gemini.google.com/share/849a5535cdc5" target="_blank"
+                   class="col-span-1 sm:col-span-2 lg:col-span-2 block app-card p-8 rounded-2xl group border-l-4 border-l-neonOrange">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-neonOrange/10 rounded-lg text-neonOrange group-hover:text-white group-hover:bg-neonOrange transition-colors shadow-[0_0_15px_rgba(255,140,0,0.3)]">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/><path d="M8.5 8.5a2.5 2.5 0 0 1 0 5"/></svg>
                         </div>
+                        <span class="text-[10px] bg-neonBlue/10 text-neonBlue border border-neonBlue/50 font-bold px-3 py-1 rounded-sm animate-pulse shadow-[0_0_10px_rgba(0,243,255,0.3)]">V2.0 SYSTEM UPDATE</span>
+                    </div>
+                    <h3 class="text-2xl font-tech font-bold mb-2 text-white group-hover:text-neonBlue transition-colors">AIlabs Flux V2</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed group-hover:text-gray-300">Core visual engine terbaru dengan kapabilitas rendering tingkat tinggi. Dilengkapi sistem <span class="text-neonBlue font-bold">remix prompt</span>.</p>
+                </a>
+
+                <!-- 4. Affiliate V1 -->
+                <a href="https://gemini.google.com/share/d9800cca2fa0" target="_blank"
+                   class="block app-card p-6 rounded-2xl group border-dashed border border-gray-700 hover:border-green-500">
+                    <div class="mb-4 text-green-500 drop-shadow-[0_0_5px_rgba(34,197,94,0.5)]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-1 group-hover:text-green-400">AIlabs Affiliate V1</h3>
+                    <p class="text-xs text-gray-500">Partnership program.</p>
+                </a>
+
+                <!-- 5. Pose -->
+                <a href="https://gemini.google.com/share/210f872b73ca" target="_blank"
+                   class="block app-card p-6 rounded-2xl group">
+                    <h3 class="text-base font-bold text-gray-200 mb-2 group-hover:text-neonBlue">AIlabs Pose Control</h3>
+                    <p class="text-xs text-gray-500">Presisi karakter.</p>
+                </a>
+
+                <!-- 6. Efek Prompt -->
+                <a href="https://g.co/gemini/share/ddfcd83d75e4" target="_blank"
+                   class="block app-card p-6 rounded-2xl group">
+                    <h3 class="text-base font-bold text-gray-200 mb-2 group-hover:text-neonBlue">AIlabs Efek Prompt</h3>
+                    <p class="text-xs text-gray-500">Visual styling.</p>
+                </a>
+
+                <!-- 7. Asisten -->
+                <a href="https://gemini.google.com/share/bdd057d246d0" target="_blank"
+                   class="block app-card p-6 rounded-2xl group">
+                    <h3 class="text-base font-bold text-gray-200 mb-2 group-hover:text-neonBlue">AIlabs Asisten Pro</h3>
+                    <p class="text-xs text-gray-500">Personal assistant.</p>
+                </a>
+
+                <!-- 8. Cartoon -->
+                <a href="https://gemini.google.com/share/d736449f3fa3" target="_blank"
+                   class="block app-card p-6 rounded-2xl group">
+                    <h3 class="text-base font-bold text-gray-200 mb-2 group-hover:text-neonBlue">AIlabs Cartoon FX</h3>
+                    <p class="text-xs text-gray-500">Kartun instan.</p>
+                </a>
+
+                <!-- 9. Flux Basic -->
+                <a href="https://gemini.google.com/share/172e691c4663" target="_blank"
+                   class="block app-card p-6 rounded-2xl group">
+                    <h3 class="text-base font-bold text-gray-200 mb-2 group-hover:text-neonBlue">AIlabs Flux Basic</h3>
+                    <p class="text-xs text-gray-500">Versi standar.</p>
+                </a>
+
+                <!-- 10. Voice Over -->
+                <a href="https://gemini.google.com/share/b3fe8cfbcae5" target="_blank"
+                   class="block app-card p-6 rounded-2xl group">
+                    <h3 class="text-base font-bold text-gray-200 mb-2 group-hover:text-neonBlue">AIlabs Voice Over</h3>
+                    <p class="text-xs text-gray-500">Audio synthesis.</p>
+                </a>
+
+                <!-- 11. Prompt Transformer -->
+                <a href="https://gemini.google.com/share/6a35693cefd1" target="_blank"
+                   class="block app-card p-6 rounded-2xl group">
+                    <h3 class="text-base font-bold text-gray-200 mb-2 group-hover:text-neonBlue">AIlabs Prompt Transformer</h3>
+                    <p class="text-xs text-gray-500">Text optimizer.</p>
+                </a>
+
+                <!-- 12. Legacy V1 -->
+                <a href="https://gemini.google.com/share/eed4e9937fb9" target="_blank"
+                   class="block app-card p-4 rounded-xl flex items-center justify-between group hover:bg-white/5 border border-transparent hover:border-neonBlue/20 transition-colors">
+                    <span class="font-medium text-gray-400 text-xs group-hover:text-neonBlue">AIlabs V1 (Legacy)</span>
+                    <div class="w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-neonBlue group-hover:shadow-[0_0_5px_#00f3ff]"></div>
+                </a>
+
+                <!-- 13. Legacy V2 -->
+                <a href="https://gemini.google.com/share/1ecc7240fb7a" target="_blank"
+                   class="block app-card p-4 rounded-xl flex items-center justify-between group hover:bg-white/5 border border-transparent hover:border-neonBlue/20 transition-colors">
+                    <span class="font-medium text-gray-400 text-xs group-hover:text-neonBlue">AIlabs V2 (Legacy)</span>
+                    <div class="w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-neonBlue group-hover:shadow-[0_0_5px_#00f3ff]"></div>
+                </a>
+
+                <!-- 14. Web Free Member -->
+                <a href="https://websitebangpro.vercel.app/" target="_blank"
+                   class="block app-card p-4 rounded-xl flex items-center justify-between group hover:bg-white/5 border border-dashed border-gray-700 hover:border-neonBlue/50 transition-colors">
+                    <span class="font-medium text-neonBlue text-xs group-hover:drop-shadow-[0_0_5px_#00f3ff]">🌐 AIlabs Web Free Member</span>
+                    <svg class="w-3 h-3 text-neonBlue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                </a>
+            </div>
+
+            <!-- FOOTER AREA: Catatan Penting & Slogan -->
+            <div class="border-t border-white/10 pt-8">
+                
+                <!-- Catatan Penting VIP -->
+                <div class="info-box p-6 mb-8 shadow-[0_0_30px_rgba(0,243,255,0.05)] rounded-r-xl">
+                    <h3 class="text-neonOrange font-bold text-lg mb-4 flex items-center gap-2 font-tech tracking-wide">
+                        🛎️ Catatan Penting VIP:
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-200">
+                        <div class="space-y-3">
+                            <p class="flex items-start gap-3"><span class="text-neonBlue text-lg">•</span> <span>Pastikan status <span class="text-neonOrange font-bold">VIP</span> selalu aktif dan berlangganan.</span></p>
+                            <p class="flex items-start gap-3"><span class="text-neonBlue text-lg">•</span> <span>Perbarui aplikasi secara berkala untuk tools terbaru & kualitas maksimal.</span></p>
+                            <p class="flex items-start gap-3"><span class="text-neonBlue text-lg">•</span> <span>Fitur otomatis: <strong class="text-neonBlue">Smart Rendering</strong>, <strong class="text-neonBlue">Auto Enhancer</strong>, <strong class="text-neonBlue">Voice Assist</strong>.</span></p>
+                        </div>
+                        <div class="space-y-3">
+                            <p class="flex items-start gap-3"><span class="text-neonBlue text-lg">•</span> <span>Gunakan <strong class="text-neonOrange">Mode Fine-Tune</strong> atau <strong class="text-neonOrange">Manual Override</strong> untuk kontrol penuh.</span></p>
+                            <p class="flex items-start gap-3"><span class="text-neonBlue text-lg">•</span> <span>Anda prioritas utama — gunakan <strong class="text-white border-b border-neonBlue">VIP Support</strong> kapan saja.</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Slogan Only (Tanpa Tombol Logout) -->
+                <div class="text-center md:text-left">
+                    <p class="text-neonBlue font-tech text-sm md:text-base uppercase tracking-widest mb-1">
+                        🚀 Tetap Aktif. Tetap Update. Tetap Prime.
+                    </p>
+                    <p class="text-white font-bold text-lg font-sans">
+                        <span class="text-neonOrange">AILABS VIP Prime Access</span> — Unlock What Others Can’t.
+                    </p>
+                    <p class="text-gray-500 text-sm mt-2 italic">🤝 Salam dari Bang Pro</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. FLOATING SUPPORT BUTTON & MODAL (Kode Tetap Sama) -->
+    <button id="admin-help-button" title="Open Support Channel" 
+            class="fixed bottom-8 right-8 z-50 group">
+        <div class="absolute inset-0 bg-[#00ff88] rounded-full blur opacity-40 group-hover:opacity-70 transition-opacity duration-300 animate-pulse"></div>
+        <div class="relative bg-black border border-[#00ff88] text-[#00ff88] hover:bg-[#00ff88] hover:text-black rounded-full p-4 transition-all duration-300 shadow-[0_0_15px_rgba(0,255,136,0.3)]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+    </button>
+
+    <div id="admin-help-modal" class="hidden fixed inset-0 z-[60]">
+        <div id="admin-modal-overlay" class="absolute inset-0 bg-black/90 backdrop-blur-sm transition-opacity"></div>
+        <div class="relative z-10 w-full max-w-md p-4 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <div class="bg-[#0a0a0a] border border-neonBlue/30 rounded-lg shadow-[0_0_50px_rgba(0,243,255,0.15)] overflow-hidden">
+                <div class="p-5 border-b border-white/10 bg-white/5 flex justify-between items-center">
+                    <div>
+                        <h3 class="text-lg font-bold text-white font-tech tracking-wide">SYSTEM SUPPORT</h3>
+                        <p class="text-[10px] text-neonBlue uppercase tracking-wider drop-shadow-[0_0_5px_#00f3ff]">Encrypted Channel</p>
+                    </div>
+                    <button id="close-admin-modal" class="text-gray-500 hover:text-white transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                    </button>
+                </div>
+                <div class="p-6 space-y-3">
+                    <a href="https://wa.me/6281274038300" target="_blank" class="flex items-center gap-4 p-3 rounded border border-white/5 hover:border-neonBlue/50 hover:bg-neonBlue/10 transition group">
+                        <div class="w-8 h-8 rounded bg-green-900/30 flex items-center justify-center text-green-400 text-xs font-mono border border-green-500/30 shadow-[0_0_5px_rgba(34,197,94,0.3)]">OP1</div>
+                        <div><p class="font-bold text-gray-200 text-sm group-hover:text-neonBlue">Wiwik Apriyati</p><p class="text-[10px] text-gray-500">Active Now</p></div>
                     </a>
-                    <!-- Admin 2: novika ys -->
-                    <a href="https://wa.me/6282324865269" target="_blank" rel="noopener noreferrer"
-                       class="flex items-center space-x-4 p-4 rounded-lg app-link-card transition duration-200">
-                        <span class="text-2xl">?????</span>
-                        <div>
-                            <p class="font-semibold text-white">novika ys</p>
-                            <p class="text-sm text-green-400">+62 823-2486-5269</p>
-                        </div>
+                    <a href="https://wa.me/6282324865269" target="_blank" class="flex items-center gap-4 p-3 rounded border border-white/5 hover:border-neonBlue/50 hover:bg-neonBlue/10 transition group">
+                        <div class="w-8 h-8 rounded bg-green-900/30 flex items-center justify-center text-green-400 text-xs font-mono border border-green-500/30 shadow-[0_0_5px_rgba(34,197,94,0.3)]">OP2</div>
+                        <div><p class="font-bold text-gray-200 text-sm group-hover:text-neonBlue">Novika YS</p><p class="text-[10px] text-gray-500">Active Now</p></div>
                     </a>
-                    <!-- Admin 3: naomy -->
-                    <a href="https://wa.me/6285799231560" target="_blank" rel="noopener noreferrer"
-                       class="flex items-center space-x-4 p-4 rounded-lg app-link-card transition duration-200">
-                        <span class="text-2xl">?????</span>
-                        <div>
-                            <p class="font-semibold text-white">naomy</p>
-                            <p class="text-sm text-green-400">+62 857-9923-1560</p>
-                        </div>
+                    <a href="https://wa.me/6285799231560" target="_blank" class="flex items-center gap-4 p-3 rounded border border-white/5 hover:border-neonBlue/50 hover:bg-neonBlue/10 transition group">
+                        <div class="w-8 h-8 rounded bg-blue-900/30 flex items-center justify-center text-blue-400 text-xs font-mono border border-blue-500/30 shadow-[0_0_5px_rgba(59,130,246,0.3)]">BIL</div>
+                        <div><p class="font-bold text-gray-200 text-sm group-hover:text-neonBlue">Naomy</p><p class="text-[10px] text-gray-500">Billing Dept</p></div>
                     </a>
-                    <!-- Admin 4: misspurniwati -->
-                    <a href="https://wa.me/6281358494288" target="_blank" rel="noopener noreferrer"
-                       class="flex items-center space-x-4 p-4 rounded-lg app-link-card transition duration-200">
-                        <span class="text-2xl">?????</span>
-                        <div>
-                            <p class="font-semibold text-white">misspurniwati</p>
-                            <p class="text-sm text-green-400">+62 813-5849-4288</p>
-                        </div>
+                    <a href="https://wa.me/6281358494288" target="_blank" class="flex items-center gap-4 p-3 rounded border border-white/5 hover:border-neonBlue/50 hover:bg-neonBlue/10 transition group">
+                        <div class="w-8 h-8 rounded bg-orange-900/30 flex items-center justify-center text-orange-400 text-xs font-mono border border-orange-500/30 shadow-[0_0_5px_rgba(249,115,22,0.3)]">TEC</div>
+                        <div><p class="font-bold text-gray-200 text-sm group-hover:text-neonBlue">Miss Purniwati</p><p class="text-[10px] text-gray-500">Tech Support</p></div>
                     </a>
                 </div>
             </div>
         </div>
     </div>
 
-
-    <!-- JAVASCRIPT UNTUK LOGIC LOGIN -->
+    <!-- JAVASCRIPT LOGIC (TETAP SAMA) -->
     <script>
-        // =================================================================
-        // !!! PERINGATAN KEAMANAN !!!
-        // MENYIMPAN PASSWORD SEPERTI INI SANGAT TIDAK AMAN!
-        // Siapapun bisa melihat semua password ini dengan mudah.
-        // Untuk aplikasi sungguhan, gunakan Firebase atau layanan backend lainnya.
-        // =================================================================
         const userDatabase = {
             "bangpro": [
-                // --- INI 100 PASSWORD (4 DIGIT/HURUF) ---
-                "8F4K", "L1P9", "A7B0", "Z3H5", "Q6J2",
-                "T9R8", "E5Y1", "W4I7", "U2O6", "P0D3",
-                "S5G4", "V7K9", "C2N1", "X8M0", "B3L6",
-                "M9H2", "F6J8", "G1R5", "I4T7", "N0Y3",
-                "K7U2", "R8P6", "Y3D9", "H5S1", "O4W7",
-                "D9G0", "J2Z5", "2K8F", "6L1A", "1N4Q",
-                "5T7W", "0E2U", "3P8O", "7S3C", "9V6X",
-                "4B9M", "R1J7", "Y6H3", "O2S9", "D5W0",
-                "K8Z4", "T3F1", "I7G6", "P4N2", "U0B8",
-                "W9V5", "E6C3", "M2X0", "C8L7", "G4Q9",
-                "5J1P", "Z8K4", "7G3B", "C0X9", "R2Y5",
-                "V6T1", "9E4H", "F3S7", "Q0L6", "I8W2",
-                "4D9N", "B5M0", "U1A7", "O3F8", "6H2V",
-                "T9G5", "K4Z1", "Y7R3", "P2C9", "E0J4",
-                "8V6M", "1S9L", "3B7K", "N5W0", "M2Q8",
-                "G1P3", "J4R9", "A6E2", "X0Y7", "L7D5",
-                "S8I1", "F4T0", "H2B6", "W9O4", "Z5U3",
-                "V1K8", "C3N7", "R6J2", "E9G4", "T5Q1",
-                "Y0F9", "B7P5", "I2X3", "K8A0", "O4L6",
-                "U3M7", "D9S2", "G5H1", "N0C8", "M1W4",
-                // ------------------------------------------
-                "admin123" // Password baru ditambahkan
+                "8F4K", "L1P9", "A7B0", "Z3H5", "Q6J2", "T9R8", "E5Y1", "W4I7", "U2O6", "P0D3",
+                "S5G4", "V7K9", "C2N1", "X8M0", "B3L6", "M9H2", "F6J8", "G1R5", "I4T7", "N0Y3",
+                "K7U2", "R8P6", "Y3D9", "H5S1", "O4W7", "D9G0", "J2Z5", "2K8F", "6L1A", "1N4Q",
+                "5T7W", "0E2U", "3P8O", "7S3C", "9V6X", "4B9M", "R1J7", "Y6H3", "O2S9", "D5W0",
+                "K8Z4", "T3F1", "I7G6", "P4N2", "U0B8", "W9V5", "E6C3", "M2X0", "C8L7", "G4Q9",
+                "5J1P", "Z8K4", "7G3B", "C0X9", "R2Y5", "V6T1", "9E4H", "F3S7", "Q0L6", "I8W2",
+                "4D9N", "B5M0", "U1A7", "O3F8", "6H2V", "T9G5", "K4Z1", "Y7R3", "P2C9", "E0J4",
+                "8V6M", "1S9L", "3B7K", "N5W0", "M2Q8", "G1P3", "J4R9", "A6E2", "X0Y7", "L7D5",
+                "S8I1", "F4T0", "H2B6", "W9O4", "Z5U3", "V1K8", "C3N7", "R6J2", "E9G4", "T5Q1",
+                "Y0F9", "B7P5", "I2X3", "K8A0", "O4L6", "U3M7", "D9S2", "G5H1", "N0C8", "M1W4",
+                "admin123"
             ]
         };
-        // =================================================================
 
-
-        // Ambil elemen-elemen dari HTML
         const loginPage = document.getElementById('login-page');
         const portalPage = document.getElementById('portal-page');
         const loginForm = document.getElementById('login-form');
         const logoutButton = document.getElementById('logout-button');
         const errorMessage = document.getElementById('error-message');
-        // const welcomeUser = document.getElementById('welcome-user'); // Dihapus
-        
-        // Elemen Password Toggle
         const passwordInput = document.getElementById('password');
         const toggleButton = document.getElementById('toggle-password');
         const eyeOffIcon = document.getElementById('eye-off-icon');
         const eyeOnIcon = document.getElementById('eye-on-icon');
-
-        // Elemen Modal Bantuan Admin
         const adminHelpButton = document.getElementById('admin-help-button');
         const adminHelpModal = document.getElementById('admin-help-modal');
         const closeAdminModal = document.getElementById('close-admin-modal');
         const adminModalOverlay = document.getElementById('admin-modal-overlay');
 
-
-        // Cek apakah user sudah login sebelumnya (menggunakan localStorage untuk login "ingat saya")
         document.addEventListener('DOMContentLoaded', () => {
-            // DIUBAH: Kita cek "token" (yaitu password yang disimpan)
             const sessionToken = localStorage.getItem('sessionToken');
-            
-            // Cek apakah token ada DAN apakah token itu masih valid (ada di database)
             if (sessionToken && userDatabase['bangpro'].includes(sessionToken)) {
-                // Jika valid, tampilkan portal. 
-                // Kita bisa langsung pakai "bangpro" karena hanya itu user-nya.
                 showPortalPage("bangpro");
             }
-            // Jika token tidak ada, atau token tidak valid (sudah dihapus dari DB),
-            // maka tidak perlu melakukan apa-apa, halaman login akan tampil secara default.
         });
 
-        // Fungsi untuk menampilkan halaman portal
         function showPortalPage(username) {
-            // welcomeUser.textContent = username; // Tampilkan nama user // Dihapus
-            loginPage.classList.add('hidden'); // Sembunyikan login
-            portalPage.classList.remove('hidden'); // Tampilkan portal
+            loginPage.classList.add('hidden');
+            portalPage.classList.remove('hidden');
         }
 
-        // Fungsi untuk menampilkan halaman login
         function showLoginPage() {
-            localStorage.removeItem('sessionToken'); // DIUBAH // Hapus token sesi
-            portalPage.classList.add('hidden'); // Sembunyikan portal
-            loginPage.classList.remove('hidden'); // Tampilkan login
-            // Username dihapus dari HTML, tidak perlu dikosongkan.
-            document.getElementById('password').value = ''; // Kosongkan input password
-            errorMessage.textContent = ''; // Kosongkan error
+            localStorage.removeItem('sessionToken');
+            portalPage.classList.add('hidden');
+            loginPage.classList.remove('hidden');
+            document.getElementById('password').value = '';
+            errorMessage.textContent = '';
         }
 
-        // Event listener saat form login disubmit
         loginForm.addEventListener('submit', (e) => {
-            e.preventDefault(); // Biar halaman tidak refresh
-            
-            // Username diatur secara permanen karena field input telah dihapus
+            e.preventDefault();
             const username = "bangpro"; 
             const password = document.getElementById('password').value.trim();
-
-            // Cek ke 'database'
             if (userDatabase.hasOwnProperty(username) && userDatabase[username].includes(password)) {
-                // Jika BENAR
-                localStorage.setItem('sessionToken', password); // DIUBAH // Simpan password sebagai token
+                localStorage.setItem('sessionToken', password);
                 showPortalPage(username);
             } else {
-                // Jika SALAH, hanya tampilkan error password
-                errorMessage.textContent = 'Password salah, brow.'; 
+                errorMessage.textContent = 'ACCESS DENIED: INVALID TOKEN'; 
             }
         });
         
-        // Event listener untuk tombol logout
         logoutButton.addEventListener('click', () => {
             showLoginPage();
         });
 
-        // Event listener untuk tombol toggle password visibility
         if (toggleButton && passwordInput) {
             toggleButton.addEventListener('click', () => {
                 const isPassword = passwordInput.getAttribute('type') === 'password';
-                
-                // Toggle tipe input
                 passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
-                
-                // Toggle ikon
                 eyeOffIcon.classList.toggle('hidden', !isPassword);
                 eyeOnIcon.classList.toggle('hidden', isPassword);
             });
         }
 
-        // Event listener untuk Modal Bantuan Admin
         if (adminHelpButton && adminHelpModal && closeAdminModal && adminModalOverlay) {
-            // Buka modal saat tombol FAB di-klik
             adminHelpButton.addEventListener('click', () => {
                 adminHelpModal.classList.remove('hidden');
             });
-
-            // Tutup modal saat tombol 'X' di-klik
             closeAdminModal.addEventListener('click', () => {
                 adminHelpModal.classList.add('hidden');
             });
-
-            // Tutup modal saat overlay (latar belakang) di-klik
             adminModalOverlay.addEventListener('click', () => {
                 adminHelpModal.classList.add('hidden');
             });
         }
-
     </script>
 </body>
 </html>
