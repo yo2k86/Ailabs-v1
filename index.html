@@ -65,7 +65,7 @@
             }
         }
 
-        /* Overlay - SANGAT TIPIS (Hampir hilang) */
+        /* Overlay - SUPER TIPIS (Hampir hilang) agar foto jelas */
         .bg-overlay {
             position: fixed;
             top: 0;
@@ -73,9 +73,9 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(circle at 15% 15%, rgba(124, 58, 237, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 85% 85%, rgba(255, 153, 0, 0.1) 0%, transparent 50%),
-                rgba(0, 0, 0, 0.2); /* Sedikit gelap untuk kontras */
+                radial-gradient(circle at 15% 15%, rgba(124, 58, 237, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 85% 85%, rgba(255, 153, 0, 0.05) 0%, transparent 50%),
+                rgba(0, 0, 0, 0.1); /* Opacity dikurangi drastis */
             z-index: -1;
         }
 
@@ -96,19 +96,19 @@
             animation: slidePop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); 
         }
 
-        /* ULTRA CLEAR GLASS PANEL */
+        /* ULTRA CLEAR GLASS PANEL - SANGAT BENING */
         .glass-panel {
-            background: rgba(0, 0, 0, 0.2); /* Sedikit lebih gelap agar teks putih jelas */
-            backdrop-filter: blur(3px); 
-            -webkit-backdrop-filter: blur(3px);
-            border: 1px solid rgba(255, 255, 255, 0.15); 
-            border-top: 1px solid rgba(255, 255, 255, 0.3); 
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.05); /* Hampir transparan total */
+            backdrop-filter: blur(1px); /* Blur sangat minim agar foto di belakang tajam */
+            -webkit-backdrop-filter: blur(1px);
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-top: 1px solid rgba(255, 255, 255, 0.2); 
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
         }
 
         /* Info Box */
         .info-box {
-            background: rgba(0, 0, 0, 0.3); 
+            background: rgba(0, 0, 0, 0.2); 
             position: relative;
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-left: none;
@@ -125,9 +125,9 @@
             box-shadow: 0 0 15px #FF9900;
         }
 
-        /* App Card */
+        /* App Card - Transparan */
         .app-card {
-            background: rgba(0, 0, 0, 0.3); 
+            background: rgba(0, 0, 0, 0.15); /* Transparan */
             backdrop-filter: blur(0px); 
             -webkit-backdrop-filter: blur(0px);
             /* BORDER TEBAL & NEON */
@@ -140,7 +140,7 @@
 
         .app-card:hover {
             transform: translateY(-5px);
-            background: rgba(0, 0, 0, 0.5); 
+            background: rgba(0, 0, 0, 0.4); 
             /* Hover Effect: Border Solid & Glow Kuat */
             border-color: #00ffd5;
             box-shadow: 0 0 30px rgba(0, 255, 213, 0.4), inset 0 0 10px rgba(0, 255, 213, 0.1);
@@ -148,7 +148,7 @@
         
         /* Input Field */
         .input-tech {
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.3);
             color: #00ffd5;
             font-family: 'Inter', sans-serif;
@@ -166,7 +166,7 @@
 
         /* Tombol Cyber */
         .btn-cyber {
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(0, 255, 213, 0.6);
             color: #00ffd5;
             text-transform: uppercase;
