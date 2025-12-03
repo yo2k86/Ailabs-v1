@@ -48,20 +48,20 @@
             background-color: #050110; 
             background-image: url('./foto-profil.png'); 
             background-size: cover;
-            background-position: center center; /* Pastikan foto di tengah */
+            background-position: center center; 
             background-repeat: no-repeat;
             background-attachment: fixed;
             overflow-x: hidden;
-            /* Tambahkan text-shadow global agar tulisan terbaca di atas foto */
-            text-shadow: 0 2px 4px rgba(0,0,0,0.9); 
+            /* Text shadow KUAT agar tulisan terbaca jelas di background apapun */
+            text-shadow: 0 2px 8px rgba(0,0,0,1); 
         }
 
         /* KHUSUS MOBILE: Agar foto profil terlihat utuh */
         @media (max-width: 768px) {
             body {
-                background-size: contain; /* Memastikan seluruh foto masuk ke layar */
-                background-position: top center; /* Posisi mulai dari atas */
-                background-attachment: fixed; /* Tetap diam saat discroll */
+                background-size: contain; 
+                background-position: top center; 
+                background-attachment: fixed; 
             }
         }
 
@@ -75,23 +75,40 @@
             background: 
                 radial-gradient(circle at 15% 15%, rgba(124, 58, 237, 0.1) 0%, transparent 50%),
                 radial-gradient(circle at 85% 85%, rgba(255, 153, 0, 0.1) 0%, transparent 50%),
-                rgba(0, 0, 0, 0.15); /* Opacity dikurangi dari 0.4 ke 0.15 */
+                rgba(0, 0, 0, 0.2); /* Sedikit gelap untuk kontras */
             z-index: -1;
         }
 
-        /* ULTRA CLEAR GLASS PANEL (Hampir Bening Total) */
+        /* ANIMASI POP-UP SLIDE UNTUK ANGKA */
+        @keyframes slidePop {
+            0% {
+                transform: translateY(10px) scale(0.8);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0) scale(1); 
+                opacity: 1;
+            }
+        }
+
+        .tick-anim {
+            display: inline-block; 
+            animation: slidePop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); 
+        }
+
+        /* ULTRA CLEAR GLASS PANEL */
         .glass-panel {
-            background: rgba(0, 0, 0, 0.1); /* Sedikit tint hitam transparan */
-            backdrop-filter: blur(2px); /* Blur sangat minim agar foto jelas */
-            -webkit-backdrop-filter: blur(2px);
+            background: rgba(0, 0, 0, 0.2); /* Sedikit lebih gelap agar teks putih jelas */
+            backdrop-filter: blur(3px); 
+            -webkit-backdrop-filter: blur(3px);
             border: 1px solid rgba(255, 255, 255, 0.15); 
             border-top: 1px solid rgba(255, 255, 255, 0.3); 
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
         }
 
         /* Info Box */
         .info-box {
-            background: rgba(0, 0, 0, 0.2); /* Sedikit gelap agar teks terbaca */
+            background: rgba(0, 0, 0, 0.3); 
             position: relative;
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-left: none;
@@ -108,12 +125,14 @@
             box-shadow: 0 0 15px #FF9900;
         }
 
-        /* App Card - Transparan Maksimal */
+        /* App Card */
         .app-card {
-            background: rgba(0, 0, 0, 0.2); /* Transparan gelap */
-            backdrop-filter: blur(0px); /* Hapus blur di kartu */
+            background: rgba(0, 0, 0, 0.3); 
+            backdrop-filter: blur(0px); 
             -webkit-backdrop-filter: blur(0px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            /* BORDER TEBAL & NEON */
+            border: 2px solid rgba(0, 255, 213, 0.5); 
+            box-shadow: 0 0 15px rgba(0, 255, 213, 0.15);
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
@@ -121,23 +140,25 @@
 
         .app-card:hover {
             transform: translateY(-5px);
-            background: rgba(0, 0, 0, 0.4); /* Gelap saat hover agar teks pop */
-            border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.5); 
+            /* Hover Effect: Border Solid & Glow Kuat */
+            border-color: #00ffd5;
+            box-shadow: 0 0 30px rgba(0, 255, 213, 0.4), inset 0 0 10px rgba(0, 255, 213, 0.1);
         }
         
         /* Input Field */
         .input-tech {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             color: #00ffd5;
             font-family: 'Inter', sans-serif;
             letter-spacing: 1px;
             transition: all 0.3s ease;
-            text-shadow: none; /* Input text clear */
+            text-shadow: none; 
+            font-weight: bold;
         }
         .input-tech:focus {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6);
             border-color: #FF9900;
             box-shadow: 0 0 15px rgba(255, 153, 0, 0.3);
             outline: none;
@@ -145,7 +166,7 @@
 
         /* Tombol Cyber */
         .btn-cyber {
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(0, 255, 213, 0.6);
             color: #00ffd5;
             text-transform: uppercase;
@@ -155,6 +176,7 @@
             overflow: hidden;
             transition: all 0.3s ease;
             text-shadow: 0 0 5px rgba(0,0,0,1);
+            font-weight: 800;
         }
         .btn-cyber:hover {
             background: rgba(0, 255, 213, 0.2);
@@ -194,7 +216,6 @@
     <!-- 1. LOGIN PAGE -->
     <div id="login-page" class="w-full max-w-md relative z-10">
         <form id="login-form" class="glass-panel rounded-2xl p-10 relative overflow-hidden">
-            <!-- Decorative Glow dikurangi opacitynya agar tidak menutup foto -->
             <div class="absolute -top-20 -left-20 w-40 h-40 bg-neonBlue/5 rounded-full blur-[80px]"></div>
             <div class="absolute -bottom-20 -right-20 w-40 h-40 bg-neonOrange/5 rounded-full blur-[80px]"></div>
 
@@ -207,7 +228,7 @@
             </div>
             
             <div class="mb-8 relative z-10">
-                <p class="text-[10px] text-neonBlue uppercase tracking-widest mb-2 ml-1 opacity-100 font-bold drop-shadow-md">User ID</p>
+                <p class="text-xs text-neonBlue uppercase tracking-widest mb-2 ml-1 opacity-100 font-bold drop-shadow-md">User ID</p>
                 <div class="bg-black/30 border border-white/20 rounded-lg p-3 flex items-center justify-between shadow-lg backdrop-blur-[1px]">
                     <span class="font-mono text-white font-bold tracking-wide text-lg drop-shadow-md">bangpro</span>
                     <div class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_#22c55e] animate-pulse"></div>
@@ -215,7 +236,7 @@
             </div>
             
             <div class="mb-10 relative z-10">
-                <label for="password" class="block text-[10px] text-neonOrange uppercase tracking-widest mb-2 ml-1 opacity-100 font-bold drop-shadow-md">Security Token</label>
+                <label for="password" class="block text-xs text-neonOrange uppercase tracking-widest mb-2 ml-1 opacity-100 font-bold drop-shadow-md">Security Token</label>
                 <div class="relative group">
                     <input type="password" id="password" name="password" placeholder="ENTER CODE" required
                            class="w-full p-4 pr-12 input-tech rounded-lg text-center text-xl font-tech tracking-widest placeholder-white/40">
@@ -237,53 +258,55 @@
     <div id="portal-page" class="w-full max-w-7xl p-4 hidden relative z-10">
         <div class="glass-panel rounded-3xl p-6 md:p-10">
             
-            <!-- HEADER -->
+            <!-- HEADER (COMPACT LAYOUT) -->
             <div class="mb-10 border-b border-white/10 pb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
-                <div class="max-w-3xl">
+                
+                <!-- Left: Titles -->
+                <div class="max-w-2xl">
                     <h1 class="text-xl md:text-3xl font-bold text-white tracking-tight font-tech mb-4 leading-tight drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]">
-                        <span class="text-neonOrange drop-shadow-[0_0_10px_rgba(255,153,0,0.5)]">⚡ Selamat Datang Member</span> <br class="hidden md:block">
-                        <span class="text-neonOrange">AILABS</span> 
-                        <span class="text-neonBlue drop-shadow-[0_0_8px_rgba(0,255,213,0.5)]">VIP Prime Access</span>
+                        <span class="text-neonOrange drop-shadow-[0_0_10px_rgba(255,153,0,0.5)] block mb-1">⚡ WELCOME AILABS</span>
+                        <span class="text-neonBlue drop-shadow-[0_0_8px_rgba(0,255,213,0.5)] block text-lg md:text-2xl">VIP Prime Access</span>
                     </h1>
                     <p class="text-gray-100 text-sm md:text-base leading-relaxed border-l-2 border-neonBlue pl-4 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] font-medium">
                         Terima kasih telah bergabung sebagai member eksklusif. Kini Anda mendapatkan akses prioritas ke fitur premium, cinematic prompt assist, template khusus, dan experimental tools yang tidak tersedia untuk pengguna biasa.
                     </p>
                 </div>
                 
-                <!-- INTEGRATED STATUS & TRAFFIC MONITOR WIDGET -->
-                <div class="w-full md:w-auto bg-black/40 border border-white/10 rounded-xl p-4 backdrop-blur-[2px] flex flex-col gap-3 shadow-2xl hover:bg-black/50 transition-colors">
+                <!-- Right: Status, Logout & Traffic (COMPACT & CLEAN) -->
+                <div class="flex flex-col items-end gap-3 w-full md:w-auto">
                     
                     <!-- Row 1: Account Status & Logout -->
-                    <div class="flex justify-between items-center gap-6 border-b border-white/10 pb-3">
-                        <div>
-                            <span class="text-[10px] uppercase tracking-widest text-gray-300 block mb-0.5 font-bold">Status</span>
-                            <span class="text-neonBlue font-tech text-xs font-bold shadow-[0_0_10px_rgba(0,255,213,0.2)]">ACTIVE PRIME</span>
+                    <div class="flex items-center justify-end gap-4 w-full">
+                        <div class="text-right">
+                            <span class="text-[9px] text-gray-300 uppercase tracking-widest block mb-0.5 font-bold shadow-black drop-shadow-md">Status</span>
+                            <span class="text-neonBlue font-tech text-xs font-bold drop-shadow-[0_0_8px_rgba(0,255,213,0.8)]">ACTIVE PRIME</span>
                         </div>
-                        <button id="logout-button" class="text-[10px] text-red-400 hover:text-white border border-red-500/30 hover:bg-red-500 px-3 py-1 rounded transition-all duration-300 font-bold bg-black/20">LOGOUT</button>
+                        <button id="logout-button" class="text-[10px] text-red-400 hover:text-white border border-red-500/40 hover:bg-red-500 px-4 py-1.5 rounded transition-all duration-300 font-bold bg-black/40 backdrop-blur-sm shadow-md">
+                            LOGOUT
+                        </button>
                     </div>
 
-                    <!-- Row 2: Live Traffic Monitor -->
-                    <div>
-                         <div class="flex items-center gap-2 mb-1">
-                            <div class="relative flex h-2 w-2">
-                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-neonOrange opacity-75"></span>
-                              <span class="relative inline-flex rounded-full h-2 w-2 bg-neonOrange"></span>
-                            </div>
-                            <span class="text-[10px] text-gray-300 uppercase tracking-widest font-bold">Live Traffic</span>
-                         </div>
-                         
-                         <div class="flex justify-between items-end gap-8">
-                             <span id="online-count" class="font-mono text-2xl font-bold text-white leading-none drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]">0</span>
-                             <div class="flex gap-3 text-[10px] font-mono text-gray-300 font-bold">
-                                 <span class="flex items-center gap-1">🇮🇩 <span id="idn-count" class="text-white">0</span></span>
-                                 <span class="flex items-center gap-1">🇺🇸 <span id="usa-count" class="text-white">0</span></span>
-                             </div>
-                         </div>
+                    <!-- Row 2: Compact Traffic Monitor -->
+                    <div class="bg-black/40 border border-white/10 rounded-lg px-3 py-2 flex items-center gap-3 backdrop-blur-sm shadow-lg w-full md:w-auto justify-between md:justify-end">
+                        <div class="flex items-center gap-2 border-r border-white/10 pr-3">
+                            <span class="relative flex h-2 w-2">
+                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                              <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500 shadow-[0_0_8px_#22c55e]"></span>
+                            </span>
+                            <span class="text-[10px] text-white font-bold uppercase tracking-wide drop-shadow-md">Online</span>
+                        </div>
+                        
+                        <div class="flex gap-3 text-[10px] font-mono font-bold text-gray-300">
+                            <span class="flex items-center gap-1 drop-shadow-md"><span class="grayscale-0">🇮🇩</span> <span id="srv1-count" class="text-neonBlue tick-anim">0</span></span>
+                            <span class="flex items-center gap-1 drop-shadow-md"><span class="grayscale-0">🇺🇸</span> <span id="srv2-count" class="text-neonOrange tick-anim">0</span></span>
+                            <span class="flex items-center gap-1 drop-shadow-md"><span class="grayscale-0">🇸🇬</span> <span id="srv3-count" class="text-purple-400 tick-anim">0</span></span>
+                        </div>
                     </div>
+
                 </div>
             </div>
 
-            <!-- GRID APLIKASI (Judul dengan Neon Glow) -->
+            <!-- GRID APLIKASI (Judul dengan Neon Glow & Border Tebal) -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
 
                 <!-- 0. Ailabs Studio Pro V1 -->
@@ -607,47 +630,50 @@
             errorMessage.textContent = '';
         }
 
-        // --- NEW: SIMULASI LIVE USER COUNTER WITH DUAL SERVERS (INTEGRATED) ---
+        // --- NEW: SIMULASI LIVE USER COUNTER (3 SERVERS) ---
         function initFakeOnlineCounter() {
-            const totalSpan = document.getElementById('online-count');
-            const idnSpan = document.getElementById('idn-count');
-            const usaSpan = document.getElementById('usa-count');
+            const srv1Span = document.getElementById('srv1-count');
+            const srv2Span = document.getElementById('srv2-count');
+            const srv3Span = document.getElementById('srv3-count');
             
-            if(!totalSpan || !idnSpan || !usaSpan) return; // Guard clause
+            if(!srv1Span || !srv2Span || !srv3Span) return; 
 
-            // 1. Set angka awal (random antara 15 - 35 agar lebih humble)
-            let totalUsers = Math.floor(Math.random() * (35 - 15 + 1) + 15);
+            const animateValue = (element, value) => {
+                if (element.innerText != value) {
+                    element.classList.remove('tick-anim'); 
+                    void element.offsetWidth; 
+                    element.innerText = value;
+                    element.classList.add('tick-anim');
+                }
+            };
+
+            // Initial Values
+            let srv1 = Math.floor(Math.random() * (15 - 5 + 1) + 5); 
+            let srv2 = Math.floor(Math.random() * (20 - 8 + 1) + 8); 
+            let srv3 = Math.floor(Math.random() * (12 - 4 + 1) + 4); 
             
-            // Fungsi update tampilan
             const updateDisplay = () => {
-                // Pembagian server: USA (Luar) lebih banyak (sekitar 60-75%)
-                const usaUsers = Math.floor(totalUsers * (0.6 + (Math.random() * 0.15)));
-                const idnUsers = totalUsers - usaUsers;
-
-                totalSpan.innerText = totalUsers;
-                idnSpan.innerText = idnUsers;
-                usaSpan.innerText = usaUsers;
+                animateValue(srv1Span, srv1);
+                animateValue(srv2Span, srv2);
+                animateValue(srv3Span, srv3);
             };
 
             updateDisplay();
 
-            // 2. Simulasi perubahan angka (naik/turun) setiap 3-5 detik
-            const intervalId = setInterval(() => {
-                // Random change lebih kecil (antara -2 sampai +3)
-                const change = Math.floor(Math.random() * 6) - 2; 
-                totalUsers += change;
+            setInterval(() => {
+                const target = Math.floor(Math.random() * 3);
+                const change = Math.floor(Math.random() * 3) - 1; 
 
-                // Batasan logis (Min 8, Max 50)
-                if (totalUsers < 8) totalUsers = 8;
-                if (totalUsers > 50) totalUsers = 50;
+                if (target === 0) srv1 += change;
+                else if (target === 1) srv2 += change;
+                else srv3 += change;
+
+                if (srv1 < 3) srv1 = 3; if (srv1 > 30) srv1 = 30;
+                if (srv2 < 5) srv2 = 5; if (srv2 > 40) srv2 = 40;
+                if (srv3 < 2) srv3 = 2; if (srv3 > 25) srv3 = 25;
 
                 updateDisplay();
-                
-                // Efek visual 'flash' kecil pada teks saat berubah
-                totalSpan.classList.add('text-neonBlue');
-                setTimeout(() => totalSpan.classList.remove('text-neonBlue'), 300);
-
-            }, 4500); // Update sedikit lebih lambat biar santai
+            }, 4000); 
         }
 
         loginForm.addEventListener('submit', (e) => {
