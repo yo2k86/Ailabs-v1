@@ -48,13 +48,15 @@
             background-color: #050110; 
             background-image: url('./foto-profil.png'); 
             background-size: cover;
-            background-position: center;
+            background-position: center center; /* Pastikan foto di tengah */
             background-repeat: no-repeat;
             background-attachment: fixed;
             overflow-x: hidden;
+            /* Tambahkan text-shadow global agar tulisan terbaca di atas foto */
+            text-shadow: 0 2px 4px rgba(0,0,0,0.9); 
         }
 
-        /* Overlay */
+        /* Overlay - SANGAT TIPIS (Hampir hilang) */
         .bg-overlay {
             position: fixed;
             top: 0;
@@ -62,27 +64,27 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(circle at 15% 15%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 85% 85%, rgba(255, 153, 0, 0.15) 0%, transparent 50%),
-                rgba(0, 0, 0, 0.4); 
+                radial-gradient(circle at 15% 15%, rgba(124, 58, 237, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 85% 85%, rgba(255, 153, 0, 0.1) 0%, transparent 50%),
+                rgba(0, 0, 0, 0.15); /* Opacity dikurangi dari 0.4 ke 0.15 */
             z-index: -1;
         }
 
-        /* SUPER TRANSPARENT GLASS PANEL */
+        /* ULTRA CLEAR GLASS PANEL (Hampir Bening Total) */
         .glass-panel {
-            background: rgba(255, 255, 255, 0.02); 
-            backdrop-filter: blur(8px); 
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            border-top: 1px solid rgba(255, 255, 255, 0.2); 
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.1); /* Sedikit tint hitam transparan */
+            backdrop-filter: blur(2px); /* Blur sangat minim agar foto jelas */
+            -webkit-backdrop-filter: blur(2px);
+            border: 1px solid rgba(255, 255, 255, 0.15); 
+            border-top: 1px solid rgba(255, 255, 255, 0.3); 
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
         }
 
         /* Info Box */
         .info-box {
-            background: rgba(255, 255, 255, 0.01);
+            background: rgba(0, 0, 0, 0.2); /* Sedikit gelap agar teks terbaca */
             position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-left: none;
             overflow: hidden;
         }
@@ -97,12 +99,12 @@
             box-shadow: 0 0 15px #FF9900;
         }
 
-        /* App Card */
+        /* App Card - Transparan Maksimal */
         .app-card {
-            background: rgba(255, 255, 255, 0.02); 
-            backdrop-filter: blur(5px); 
-            -webkit-backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(0, 0, 0, 0.2); /* Transparan gelap */
+            backdrop-filter: blur(0px); /* Hapus blur di kartu */
+            -webkit-backdrop-filter: blur(0px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
@@ -110,31 +112,32 @@
 
         .app-card:hover {
             transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.08); 
+            background: rgba(0, 0, 0, 0.4); /* Gelap saat hover agar teks pop */
             border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
         }
         
         /* Input Field */
         .input-tech {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             color: #00ffd5;
             font-family: 'Inter', sans-serif;
             letter-spacing: 1px;
             transition: all 0.3s ease;
+            text-shadow: none; /* Input text clear */
         }
         .input-tech:focus {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.5);
             border-color: #FF9900;
-            box-shadow: 0 0 15px rgba(255, 153, 0, 0.2);
+            box-shadow: 0 0 15px rgba(255, 153, 0, 0.3);
             outline: none;
         }
 
         /* Tombol Cyber */
         .btn-cyber {
-            background: transparent;
-            border: 1px solid rgba(0, 255, 213, 0.5);
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(0, 255, 213, 0.6);
             color: #00ffd5;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -142,13 +145,13 @@
             position: relative;
             overflow: hidden;
             transition: all 0.3s ease;
-            backdrop-filter: blur(2px);
+            text-shadow: 0 0 5px rgba(0,0,0,1);
         }
         .btn-cyber:hover {
-            background: rgba(0, 255, 213, 0.1);
+            background: rgba(0, 255, 213, 0.2);
             border-color: #00ffd5;
             color: white;
-            box-shadow: 0 0 20px rgba(0, 255, 213, 0.2);
+            box-shadow: 0 0 20px rgba(0, 255, 213, 0.3);
         }
 
         /* Scrollbar */
@@ -159,7 +162,7 @@
             background: transparent;
         }
         ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.3);
             border-radius: 10px;
         }
     </style>
@@ -171,91 +174,53 @@
 
     <!-- Logo -->
     <img src="./logo.png" alt="Logo AIlabs" 
-         class="fixed top-8 right-8 w-16 h-auto z-50 opacity-90 hover:opacity-100 transition-opacity duration-300 filter drop-shadow-[0_0_10px_rgba(0,255,213,0.4)]"
+         class="fixed top-8 right-8 w-16 h-auto z-50 opacity-90 hover:opacity-100 transition-opacity duration-300 filter drop-shadow-[0_0_10px_rgba(0,255,213,0.8)]"
          onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='flex'">
     
     <!-- Fallback Logo -->
-    <div id="fallback-logo" class="fixed top-8 right-8 z-50 opacity-90 hover:opacity-100 transition-opacity duration-300 filter drop-shadow-[0_0_15px_rgba(0,255,213,0.6)] bg-white/5 p-2 rounded-full border border-neonBlue hidden justify-center items-center backdrop-blur-sm">
+    <div id="fallback-logo" class="fixed top-8 right-8 z-50 opacity-90 hover:opacity-100 transition-opacity duration-300 filter drop-shadow-[0_0_15px_rgba(0,255,213,0.6)] bg-black/30 p-2 rounded-full border border-neonBlue hidden justify-center items-center backdrop-blur-sm">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00ffd5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-    </div>
-
-    <!-- POPUP ONLINE COUNTER (ENHANCED WITH SERVERS) -->
-    <div id="online-popup" class="fixed top-6 right-6 bg-black/60 border border-neonBlue/30 text-white px-5 py-4 rounded-xl shadow-[0_0_30px_rgba(0,255,213,0.15)] backdrop-blur-md z-[100] hidden flex flex-col gap-3 transition-all duration-700 transform -translate-y-[200%] opacity-0 min-w-[200px]">
-        
-        <!-- Header Status -->
-        <div class="flex items-center gap-2 border-b border-white/10 pb-2">
-            <div class="relative flex h-2.5 w-2.5">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-neonBlue opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-neonBlue"></span>
-            </div>
-            <span class="font-tech tracking-wider text-[10px] text-gray-400 uppercase">Live Traffic Monitor</span>
-        </div>
-
-        <!-- Server Stats Grid -->
-        <div class="grid grid-cols-3 gap-2 text-center items-center">
-            <!-- Total -->
-            <div class="flex flex-col items-center">
-                <span class="text-[10px] text-gray-500 font-bold mb-0.5">TOTAL</span>
-                <span id="online-count" class="font-mono text-xl font-bold text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]">0</span>
-            </div>
-            
-            <!-- Divider -->
-            <div class="h-8 w-px bg-white/10 mx-auto"></div>
-
-            <!-- Servers Detail -->
-            <div class="flex flex-col gap-2">
-                <!-- Server IDN -->
-                <div class="flex justify-between items-center gap-3">
-                    <span class="text-[10px] text-neonOrange font-bold flex items-center gap-1">🇮🇩 IDN</span>
-                    <span id="idn-count" class="font-mono text-xs text-gray-300">0</span>
-                </div>
-                <!-- Server USA -->
-                <div class="flex justify-between items-center gap-3">
-                    <span class="text-[10px] text-blue-400 font-bold flex items-center gap-1">🇺🇸 USA</span>
-                    <span id="usa-count" class="font-mono text-xs text-gray-300">0</span>
-                </div>
-            </div>
-        </div>
     </div>
 
     <!-- 1. LOGIN PAGE -->
     <div id="login-page" class="w-full max-w-md relative z-10">
         <form id="login-form" class="glass-panel rounded-2xl p-10 relative overflow-hidden">
-            <div class="absolute -top-20 -left-20 w-40 h-40 bg-neonBlue/10 rounded-full blur-[80px]"></div>
-            <div class="absolute -bottom-20 -right-20 w-40 h-40 bg-neonOrange/10 rounded-full blur-[80px]"></div>
+            <!-- Decorative Glow dikurangi opacitynya agar tidak menutup foto -->
+            <div class="absolute -top-20 -left-20 w-40 h-40 bg-neonBlue/5 rounded-full blur-[80px]"></div>
+            <div class="absolute -bottom-20 -right-20 w-40 h-40 bg-neonOrange/5 rounded-full blur-[80px]"></div>
 
             <div class="text-center mb-12 relative z-10">
-                <h1 class="text-5xl font-tech font-bold text-white mb-3 tracking-wider drop-shadow-lg">
-                    <span class="text-neonOrange drop-shadow-[0_0_15px_rgba(255,153,0,0.6)]">AI</span><span class="text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]">LABS</span>
+                <h1 class="text-5xl font-tech font-bold text-white mb-3 tracking-wider drop-shadow-[0_4px_4px_rgba(0,0,0,1)]">
+                    <span class="text-neonOrange drop-shadow-[0_0_15px_rgba(255,153,0,0.8)]">AI</span><span class="text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.6)]">LABS</span>
                 </h1>
-                <div class="h-px w-32 bg-gradient-to-r from-transparent via-neonBlue to-transparent mx-auto mb-6 opacity-50"></div>
-                <span class="inline-block bg-white/5 border border-white/10 text-neonBlue text-xs font-bold tracking-[0.25em] uppercase px-3 py-1 rounded-full backdrop-blur-sm">VIP Prime Access</span>
+                <div class="h-px w-32 bg-gradient-to-r from-transparent via-neonBlue to-transparent mx-auto mb-6 opacity-80 shadow-[0_0_10px_#00ffd5]"></div>
+                <span class="inline-block bg-black/20 border border-white/20 text-neonBlue text-xs font-bold tracking-[0.25em] uppercase px-3 py-1 rounded-full backdrop-blur-none shadow-lg">VIP Prime Access</span>
             </div>
             
             <div class="mb-8 relative z-10">
-                <p class="text-[10px] text-neonBlue uppercase tracking-widest mb-2 ml-1 opacity-80 font-bold">User ID</p>
-                <div class="bg-white/5 border border-white/10 rounded-lg p-3 flex items-center justify-between shadow-sm">
+                <p class="text-[10px] text-neonBlue uppercase tracking-widest mb-2 ml-1 opacity-100 font-bold drop-shadow-md">User ID</p>
+                <div class="bg-black/30 border border-white/20 rounded-lg p-3 flex items-center justify-between shadow-lg backdrop-blur-[1px]">
                     <span class="font-mono text-white font-bold tracking-wide text-lg drop-shadow-md">bangpro</span>
                     <div class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_#22c55e] animate-pulse"></div>
                 </div>
             </div>
             
             <div class="mb-10 relative z-10">
-                <label for="password" class="block text-[10px] text-neonOrange uppercase tracking-widest mb-2 ml-1 opacity-80 font-bold">Security Token</label>
+                <label for="password" class="block text-[10px] text-neonOrange uppercase tracking-widest mb-2 ml-1 opacity-100 font-bold drop-shadow-md">Security Token</label>
                 <div class="relative group">
                     <input type="password" id="password" name="password" placeholder="ENTER CODE" required
-                           class="w-full p-4 pr-12 input-tech rounded-lg text-center text-xl font-tech tracking-widest placeholder-white/20">
-                    <button type="button" id="toggle-password" class="absolute inset-y-0 right-0 flex items-center pr-4 text-neonBlue/70 hover:text-neonOrange transition-colors">
+                           class="w-full p-4 pr-12 input-tech rounded-lg text-center text-xl font-tech tracking-widest placeholder-white/40">
+                    <button type="button" id="toggle-password" class="absolute inset-y-0 right-0 flex items-center pr-4 text-neonBlue/80 hover:text-neonOrange transition-colors">
                         <svg id="eye-off-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 11 8 11 8a17.25 17.25 0 0 1-2.07 2.65M16.27 16.27A10.47 10.47 0 0 1 12 19c-7 0-11-8-11-8a18.5 18.5 0 0 1 4.26-5.73"/><path d="m2 2 20 20"/></svg>
                         <svg id="eye-on-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
                     </button>
                 </div>
             </div>
             
-            <button type="submit" class="w-full btn-cyber py-4 rounded-lg font-bold text-lg tracking-wider relative z-10">
+            <button type="submit" class="w-full btn-cyber py-4 rounded-lg font-bold text-lg tracking-wider relative z-10 shadow-xl">
                 Initialize
             </button>
-            <p id="error-message" class="text-red-400 text-center mt-6 text-xs font-mono min-h-[20px] relative z-10 drop-shadow-md"></p>
+            <p id="error-message" class="text-red-400 text-center mt-6 text-xs font-mono min-h-[20px] relative z-10 drop-shadow-[0_2px_2px_rgba(0,0,0,1)]"></p>
         </form>
     </div>
 
@@ -266,26 +231,46 @@
             <!-- HEADER -->
             <div class="mb-10 border-b border-white/10 pb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
                 <div class="max-w-3xl">
-                    <h1 class="text-xl md:text-3xl font-bold text-white tracking-tight font-tech mb-4 leading-tight drop-shadow-md">
+                    <h1 class="text-xl md:text-3xl font-bold text-white tracking-tight font-tech mb-4 leading-tight drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]">
                         <span class="text-neonOrange drop-shadow-[0_0_10px_rgba(255,153,0,0.5)]">⚡ Selamat Datang Member</span> <br class="hidden md:block">
                         <span class="text-neonOrange">AILABS</span> 
                         <span class="text-neonBlue drop-shadow-[0_0_8px_rgba(0,255,213,0.5)]">VIP Prime Access</span>
                     </h1>
-                    <p class="text-gray-200 text-sm md:text-base leading-relaxed border-l-2 border-neonBlue pl-4 drop-shadow-sm opacity-90">
+                    <p class="text-gray-100 text-sm md:text-base leading-relaxed border-l-2 border-neonBlue pl-4 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] font-medium">
                         Terima kasih telah bergabung sebagai member eksklusif. Kini Anda mendapatkan akses prioritas ke fitur premium, cinematic prompt assist, template khusus, dan experimental tools yang tidak tersedia untuk pengguna biasa.
                     </p>
                 </div>
                 
-                <div class="flex flex-row md:flex-col items-center md:items-end gap-4 w-full md:w-auto justify-between md:justify-end">
-                      <div class="text-left md:text-right">
-                          <span class="text-[10px] uppercase tracking-widest text-gray-400 block mb-1">Account Status</span>
-                          <span class="inline-block bg-white/5 border border-white/10 text-white font-tech text-sm font-bold px-3 py-1 rounded shadow-[0_0_10px_rgba(0,255,213,0.1)] animate-glow-pulse tracking-wider backdrop-blur-sm">ACTIVE PRIME</span>
-                      </div>
-                      <button id="logout-button" 
-                             class="border border-red-500/40 text-red-400 bg-red-500/5 hover:bg-red-500/80 hover:text-white px-6 py-2 rounded-full text-[10px] md:text-xs font-bold transition-all duration-300 uppercase tracking-wider whitespace-nowrap flex items-center gap-2 backdrop-blur-sm">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
-                          Log Out
-                      </button>
+                <!-- INTEGRATED STATUS & TRAFFIC MONITOR WIDGET -->
+                <div class="w-full md:w-auto bg-black/40 border border-white/10 rounded-xl p-4 backdrop-blur-[2px] flex flex-col gap-3 shadow-2xl hover:bg-black/50 transition-colors">
+                    
+                    <!-- Row 1: Account Status & Logout -->
+                    <div class="flex justify-between items-center gap-6 border-b border-white/10 pb-3">
+                        <div>
+                            <span class="text-[10px] uppercase tracking-widest text-gray-300 block mb-0.5 font-bold">Status</span>
+                            <span class="text-neonBlue font-tech text-xs font-bold shadow-[0_0_10px_rgba(0,255,213,0.2)]">ACTIVE PRIME</span>
+                        </div>
+                        <button id="logout-button" class="text-[10px] text-red-400 hover:text-white border border-red-500/30 hover:bg-red-500 px-3 py-1 rounded transition-all duration-300 font-bold bg-black/20">LOGOUT</button>
+                    </div>
+
+                    <!-- Row 2: Live Traffic Monitor -->
+                    <div>
+                         <div class="flex items-center gap-2 mb-1">
+                            <div class="relative flex h-2 w-2">
+                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-neonOrange opacity-75"></span>
+                              <span class="relative inline-flex rounded-full h-2 w-2 bg-neonOrange"></span>
+                            </div>
+                            <span class="text-[10px] text-gray-300 uppercase tracking-widest font-bold">Live Traffic</span>
+                         </div>
+                         
+                         <div class="flex justify-between items-end gap-8">
+                             <span id="online-count" class="font-mono text-2xl font-bold text-white leading-none drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]">0</span>
+                             <div class="flex gap-3 text-[10px] font-mono text-gray-300 font-bold">
+                                 <span class="flex items-center gap-1">🇮🇩 <span id="idn-count" class="text-white">0</span></span>
+                                 <span class="flex items-center gap-1">🇺🇸 <span id="usa-count" class="text-white">0</span></span>
+                             </div>
+                         </div>
+                    </div>
                 </div>
             </div>
 
@@ -297,15 +282,15 @@
                    class="block app-card p-6 rounded-2xl group relative overflow-hidden">
                     <div class="absolute inset-0 bg-neonBlue/5 animate-pulse-fast"></div>
                     <div class="absolute top-3 right-3">
-                        <span class="text-[10px] bg-neonOrange text-white font-bold px-2 py-0.5 rounded shadow-[0_0_10px_#FF9900] animate-glow-pulse backdrop-blur-sm">STUDIO PRO</span>
+                        <span class="text-[10px] bg-neonOrange text-white font-bold px-2 py-0.5 rounded shadow-[0_0_10px_#FF9900] animate-glow-pulse backdrop-blur-none bg-black/40">STUDIO PRO</span>
                     </div>
                     
-                    <div class="mb-4 text-neonBlue group-hover:scale-110 transition-transform origin-left drop-shadow-[0_0_5px_rgba(0,255,213,0.5)] relative z-10">
+                    <div class="mb-4 text-neonBlue group-hover:scale-110 transition-transform origin-left drop-shadow-[0_0_5px_rgba(0,255,213,0.8)] relative z-10">
                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
                     </div>
 
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors relative z-10 drop-shadow-md">Ailabs Studio Pro V1</h3>
-                    <p class="text-xs text-gray-300 group-hover:text-white relative z-10 font-medium">Ultimate creative studio.</p>
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors relative z-10 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">Ailabs Studio Pro V1</h3>
+                    <p class="text-xs text-gray-200 group-hover:text-white relative z-10 font-medium drop-shadow-md">Ultimate creative studio.</p>
                 </a>
 
                 <!-- Restore Image -->
@@ -313,29 +298,29 @@
                    class="block app-card p-6 rounded-2xl group relative overflow-hidden">
                     <div class="absolute inset-0 bg-neonBlue/5 animate-pulse-fast"></div>
                     <div class="absolute top-3 right-3">
-                        <span class="text-[10px] bg-neonBlue text-black font-bold px-2 py-0.5 rounded shadow-[0_0_10px_#00ffd5] animate-glow-pulse backdrop-blur-sm">NEW</span>
+                        <span class="text-[10px] bg-neonBlue text-black font-bold px-2 py-0.5 rounded shadow-[0_0_10px_#00ffd5] animate-glow-pulse backdrop-blur-none bg-white/80">NEW</span>
                     </div>
 
-                    <div class="mb-4 text-neonBlue group-hover:scale-110 transition-transform origin-left drop-shadow-[0_0_5px_rgba(0,255,213,0.5)] relative z-10">
+                    <div class="mb-4 text-neonBlue group-hover:scale-110 transition-transform origin-left drop-shadow-[0_0_5px_rgba(0,255,213,0.8)] relative z-10">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/><path d="m14 6 5.5 5.5"/><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9.5"/></svg>
                     </div>
 
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors relative z-10 drop-shadow-md">Restore Image</h3>
-                    <p class="text-xs text-gray-300 group-hover:text-white relative z-10 font-medium">Restorasi foto lama.</p>
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors relative z-10 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">Restore Image</h3>
+                    <p class="text-xs text-gray-200 group-hover:text-white relative z-10 font-medium drop-shadow-md">Restorasi foto lama.</p>
                 </a>
 
                 <!-- 1. AIlabs V1 -->
                 <a href="https://gemini.google.com/share/eed4e9937fb9" target="_blank"
                    class="block app-card p-6 rounded-2xl group">
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors drop-shadow-md">AIlabs V1 (Legacy)</h3>
-                    <p class="text-xs text-gray-400 font-medium">Previous version.</p>
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">AIlabs V1 (Legacy)</h3>
+                    <p class="text-xs text-gray-200 font-medium drop-shadow-md">Previous version.</p>
                 </a>
 
                 <!-- 2. AIlabs V2 -->
                 <a href="https://gemini.google.com/share/1ecc7240fb7a" target="_blank"
                    class="block app-card p-6 rounded-2xl group">
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors drop-shadow-md">AIlabs V2 (Legacy)</h3>
-                    <p class="text-xs text-gray-400 font-medium">Previous version.</p>
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">AIlabs V2 (Legacy)</h3>
+                    <p class="text-xs text-gray-200 font-medium drop-shadow-md">Previous version.</p>
                 </a>
 
                 <!-- 3. Suite V3 -->
@@ -344,16 +329,16 @@
                     <div class="absolute inset-0 bg-neonBlue/5 animate-pulse-fast"></div>
 
                     <div class="absolute top-3 right-3">
-                        <span class="text-[10px] bg-neonBlue text-black font-bold px-2 py-0.5 rounded shadow-[0_0_10px_#00ffd5] animate-glow-pulse backdrop-blur-sm">NEW UPDATE</span>
+                        <span class="text-[10px] bg-neonBlue text-black font-bold px-2 py-0.5 rounded shadow-[0_0_10px_#00ffd5] animate-glow-pulse backdrop-blur-none bg-white/80">NEW UPDATE</span>
                     </div>
 
-                    <div class="mb-4 text-neonOrange group-hover:scale-110 transition-transform origin-left drop-shadow-[0_0_5px_rgba(255,153,0,0.5)] relative z-10">
+                    <div class="mb-4 text-neonOrange group-hover:scale-110 transition-transform origin-left drop-shadow-[0_0_5px_rgba(255,153,0,0.8)] relative z-10">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
                     </div>
                     <div class="flex justify-between items-center mb-1 relative z-10">
-                        <h3 class="text-2xl font-bold text-white group-hover:text-neonBlue transition-colors drop-shadow-md">AIlabs Suite V3</h3>
+                        <h3 class="text-2xl font-bold text-white group-hover:text-neonBlue transition-colors drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">AIlabs Suite V3</h3>
                     </div>
-                    <p class="text-sm text-gray-300 relative z-10 font-medium">All-in-one toolkit.</p>
+                    <p class="text-sm text-gray-200 relative z-10 font-medium drop-shadow-md">All-in-one toolkit.</p>
                 </a>
 
                 <!-- 4. Ailabs Voice Over V2 -->
@@ -362,20 +347,20 @@
                     <div class="absolute inset-0 bg-neonBlue/5 animate-pulse-fast"></div>
 
                     <div class="absolute top-3 right-3">
-                        <span class="text-[10px] bg-neonBlue text-black font-bold px-2 py-0.5 rounded shadow-[0_0_10px_#00ffd5] animate-glow-pulse backdrop-blur-sm">NEW UPDATE</span>
+                        <span class="text-[10px] bg-neonBlue text-black font-bold px-2 py-0.5 rounded shadow-[0_0_10px_#00ffd5] animate-glow-pulse backdrop-blur-none bg-white/80">NEW UPDATE</span>
                     </div>
 
                     <div class="flex justify-between items-start mb-4 relative z-10">
-                        <div class="p-2 bg-neonBlue/10 rounded-lg text-neonBlue group-hover:text-white group-hover:bg-neonBlue transition-colors shadow-[0_0_10px_rgba(0,255,213,0.2)]">
+                        <div class="p-2 bg-neonBlue/20 rounded-lg text-neonBlue group-hover:text-white group-hover:bg-neonBlue transition-colors shadow-[0_0_10px_rgba(0,255,213,0.4)] backdrop-blur-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
                         </div>
                     </div>
                     
                     <div class="flex justify-between items-center mb-2 relative z-10">
-                        <h3 class="text-2xl font-bold text-white group-hover:text-neonBlue transition-colors drop-shadow-md">AIlabs Voice Over V2</h3>
-                        <span class="text-[9px] bg-neonBlue/10 text-neonBlue border border-neonBlue/50 font-bold px-1.5 py-0.5 rounded-sm backdrop-blur-sm">V2.0</span>
+                        <h3 class="text-2xl font-bold text-white group-hover:text-neonBlue transition-colors drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">AIlabs Voice Over V2</h3>
+                        <span class="text-[9px] bg-neonBlue/10 text-neonBlue border border-neonBlue/50 font-bold px-1.5 py-0.5 rounded-sm backdrop-blur-none bg-black/40">V2.0</span>
                     </div>
-                    <p class="text-sm text-gray-300 leading-relaxed group-hover:text-white relative z-10">Advanced Audio Synthesis.</p>
+                    <p class="text-sm text-gray-200 leading-relaxed group-hover:text-white relative z-10 drop-shadow-md">Advanced Audio Synthesis.</p>
                 </a>
 
                 <!-- 5. FLUX V2 -->
@@ -383,29 +368,29 @@
                    class="block app-card p-6 rounded-2xl group border-l-4 border-l-neonOrange/50 relative overflow-hidden">
                     <div class="absolute inset-0 bg-neonBlue/5 animate-pulse-fast"></div>
                     <div class="absolute top-3 right-3">
-                        <span class="text-[10px] bg-neonBlue text-black font-bold px-2 py-0.5 rounded shadow-[0_0_10px_#00ffd5] animate-glow-pulse backdrop-blur-sm">NEW UPDATE</span>
+                        <span class="text-[10px] bg-neonBlue text-black font-bold px-2 py-0.5 rounded shadow-[0_0_10px_#00ffd5] animate-glow-pulse backdrop-blur-none bg-white/80">NEW UPDATE</span>
                     </div>
 
                     <div class="flex justify-between items-start mb-4 relative z-10">
-                        <div class="p-2 bg-neonOrange/10 rounded-lg text-neonOrange group-hover:text-white group-hover:bg-neonOrange transition-colors shadow-[0_0_10px_rgba(255,153,0,0.2)]">
+                        <div class="p-2 bg-neonOrange/20 rounded-lg text-neonOrange group-hover:text-white group-hover:bg-neonOrange transition-colors shadow-[0_0_10px_rgba(255,153,0,0.4)] backdrop-blur-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/><path d="M8.5 8.5a2.5 2.5 0 0 1 0 5"/></svg>
                         </div>
                     </div>
                     <div class="flex justify-between items-center mb-2 relative z-10">
-                        <h3 class="text-2xl font-bold text-white group-hover:text-neonBlue transition-colors drop-shadow-md">AIlabs Flux V2</h3>
-                        <span class="text-[9px] bg-neonBlue/10 text-neonBlue border border-neonBlue/50 font-bold px-1.5 py-0.5 rounded-sm backdrop-blur-sm">V2.0</span>
+                        <h3 class="text-2xl font-bold text-white group-hover:text-neonBlue transition-colors drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">AIlabs Flux V2</h3>
+                        <span class="text-[9px] bg-neonBlue/10 text-neonBlue border border-neonBlue/50 font-bold px-1.5 py-0.5 rounded-sm backdrop-blur-none bg-black/40">V2.0</span>
                     </div>
-                    <p class="text-sm text-gray-300 leading-relaxed group-hover:text-white relative z-10">Core visual engine terbaru.</p>
+                    <p class="text-sm text-gray-200 leading-relaxed group-hover:text-white relative z-10 drop-shadow-md">Core visual engine terbaru.</p>
                 </a>
 
                 <!-- 6. Affiliate V1 -->
                 <a href="https://gemini.google.com/share/d9800cca2fa0" target="_blank"
                    class="block app-card p-6 rounded-2xl group border-dashed border border-gray-600 hover:border-green-500">
-                    <div class="mb-4 text-green-500 drop-shadow-[0_0_5px_rgba(34,197,94,0.5)]">
+                    <div class="mb-4 text-green-500 drop-shadow-[0_0_5px_rgba(34,197,94,0.8)]">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-1 group-hover:text-green-400 transition-colors drop-shadow-md">AIlabs Affiliate V1</h3>
-                    <p class="text-xs text-gray-500 font-medium">Partnership program.</p>
+                    <h3 class="text-xl font-bold text-white mb-1 group-hover:text-green-400 transition-colors drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">AIlabs Affiliate V1</h3>
+                    <p class="text-xs text-gray-200 font-medium drop-shadow-md">Partnership program.</p>
                 </a>
 
                 <!-- 7. Remix Prompt -->
@@ -413,69 +398,69 @@
                    class="block app-card p-6 rounded-2xl group relative overflow-hidden">
                     <div class="absolute inset-0 bg-neonBlue/5 animate-pulse-fast"></div>
                     <div class="absolute top-3 right-3">
-                        <span class="text-[10px] bg-neonBlue text-black font-bold px-2 py-0.5 rounded shadow-[0_0_10px_#00ffd5] animate-glow-pulse backdrop-blur-sm">NEW UPDATE</span>
+                        <span class="text-[10px] bg-neonBlue text-black font-bold px-2 py-0.5 rounded shadow-[0_0_10px_#00ffd5] animate-glow-pulse backdrop-blur-none bg-white/80">NEW UPDATE</span>
                     </div>
-                    <div class="mb-4 p-2 w-fit rounded-md bg-blue-900/20 text-neonBlue border border-neonBlue/20 relative z-10">
+                    <div class="mb-4 p-2 w-fit rounded-md bg-blue-900/40 text-neonBlue border border-neonBlue/20 relative z-10 backdrop-blur-sm">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-1 group-hover:text-neonBlue transition-colors relative z-10 drop-shadow-md">AIlabs Remix Prompt</h3>
-                    <p class="text-xs text-gray-300 group-hover:text-white relative z-10 font-medium">Prompt variation engine.</p>
+                    <h3 class="text-xl font-bold text-white mb-1 group-hover:text-neonBlue transition-colors relative z-10 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">AIlabs Remix Prompt</h3>
+                    <p class="text-xs text-gray-200 group-hover:text-white relative z-10 font-medium drop-shadow-md">Prompt variation engine.</p>
                 </a>
 
                 <!-- 8. Pose -->
                 <a href="https://gemini.google.com/share/210f872b73ca" target="_blank"
                    class="block app-card p-6 rounded-2xl group">
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors drop-shadow-md">AIlabs Pose Control</h3>
-                    <p class="text-xs text-gray-500 font-medium">Presisi karakter.</p>
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">AIlabs Pose Control</h3>
+                    <p class="text-xs text-gray-200 font-medium drop-shadow-md">Presisi karakter.</p>
                 </a>
 
                 <!-- 9. Efek Prompt -->
                 <a href="https://g.co/gemini/share/ddfcd83d75e4" target="_blank"
                    class="block app-card p-6 rounded-2xl group">
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors drop-shadow-md">AIlabs Efek Prompt</h3>
-                    <p class="text-xs text-gray-500 font-medium">Visual styling.</p>
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">AIlabs Efek Prompt</h3>
+                    <p class="text-xs text-gray-200 font-medium drop-shadow-md">Visual styling.</p>
                 </a>
 
                 <!-- 10. Asisten -->
                 <a href="https://gemini.google.com/share/bdd057d246d0" target="_blank"
                    class="block app-card p-6 rounded-2xl group">
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors drop-shadow-md">AIlabs Asisten Pro</h3>
-                    <p class="text-xs text-gray-500 font-medium">Personal assistant.</p>
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">AIlabs Asisten Pro</h3>
+                    <p class="text-xs text-gray-200 font-medium drop-shadow-md">Personal assistant.</p>
                 </a>
 
                 <!-- 11. Cartoon -->
                 <a href="https://gemini.google.com/share/d736449f3fa3" target="_blank"
                    class="block app-card p-6 rounded-2xl group">
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors drop-shadow-md">AIlabs Cartoon FX</h3>
-                    <p class="text-xs text-gray-500 font-medium">Kartun instan.</p>
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">AIlabs Cartoon FX</h3>
+                    <p class="text-xs text-gray-200 font-medium drop-shadow-md">Kartun instan.</p>
                 </a>
 
                 <!-- 12. Flux Basic -->
                 <a href="https://gemini.google.com/share/172e691c4663" target="_blank"
                    class="block app-card p-6 rounded-2xl group">
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors drop-shadow-md">AIlabs Flux Basic</h3>
-                    <p class="text-xs text-gray-500 font-medium">Versi standar.</p>
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">AIlabs Flux Basic</h3>
+                    <p class="text-xs text-gray-200 font-medium drop-shadow-md">Versi standar.</p>
                 </a>
 
                 <!-- 13. Voice Over -->
                 <a href="https://gemini.google.com/share/b3fe8cfbcae5" target="_blank"
                    class="block app-card p-6 rounded-2xl group">
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors drop-shadow-md">AIlabs Voice Over</h3>
-                    <p class="text-xs text-gray-500 font-medium">Audio synthesis.</p>
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">AIlabs Voice Over</h3>
+                    <p class="text-xs text-gray-200 font-medium drop-shadow-md">Audio synthesis.</p>
                 </a>
 
                 <!-- 14. Prompt Transformer -->
                 <a href="https://gemini.google.com/share/6a35693cefd1" target="_blank"
                    class="block app-card p-6 rounded-2xl group">
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors drop-shadow-md">AIlabs Prompt Transformer</h3>
-                    <p class="text-xs text-gray-500 font-medium">Text optimizer.</p>
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">AIlabs Prompt Transformer</h3>
+                    <p class="text-xs text-gray-200 font-medium drop-shadow-md">Text optimizer.</p>
                 </a>
 
                 <!-- 15. Bang Pro Toolkit -->
                 <a href="https://bangpro-toolkit.vercel.app/" target="_blank"
                    class="block app-card p-6 rounded-2xl group border-dashed border border-gray-600 hover:border-neonBlue/50">
                     <h3 class="text-xl font-bold text-neonBlue mb-2 group-hover:drop-shadow-[0_0_5px_#00ffd5] transition-all">🌐 Bang Pro Toolkit</h3>
-                    <p class="text-xs text-gray-500 font-medium">Akses member gratis.</p>
+                    <p class="text-xs text-gray-200 font-medium drop-shadow-md">Akses member gratis.</p>
                 </a>
             </div>
 
@@ -487,13 +472,13 @@
                     </h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-200">
                         <div class="space-y-3">
-                            <p class="flex items-start gap-3"><span class="text-neonBlue text-lg">•</span> <span>Pastikan status <span class="text-neonOrange font-bold">VIP</span> selalu aktif dan berlangganan.</span></p>
-                            <p class="flex items-start gap-3"><span class="text-neonBlue text-lg">•</span> <span>Perbarui aplikasi secara berkala untuk tools terbaru & kualitas maksimal.</span></p>
-                            <p class="flex items-start gap-3"><span class="text-neonBlue text-lg">•</span> <span>Fitur otomatis: <strong class="text-neonBlue">Smart Rendering</strong>, <strong class="text-neonBlue">Auto Enhancer</strong>, <strong class="text-neonBlue">Voice Assist</strong>.</span></p>
+                            <p class="flex items-start gap-3"><span class="text-neonBlue text-lg">•</span> <span class="drop-shadow-md">Pastikan status <span class="text-neonOrange font-bold">VIP</span> selalu aktif dan berlangganan.</span></p>
+                            <p class="flex items-start gap-3"><span class="text-neonBlue text-lg">•</span> <span class="drop-shadow-md">Perbarui aplikasi secara berkala untuk tools terbaru & kualitas maksimal.</span></p>
+                            <p class="flex items-start gap-3"><span class="text-neonBlue text-lg">•</span> <span class="drop-shadow-md">Fitur otomatis: <strong class="text-neonBlue">Smart Rendering</strong>, <strong class="text-neonBlue">Auto Enhancer</strong>, <strong class="text-neonBlue">Voice Assist</strong>.</span></p>
                         </div>
                         <div class="space-y-3">
-                            <p class="flex items-start gap-3"><span class="text-neonBlue text-lg">•</span> <span>Gunakan <strong class="text-neonOrange">Mode Fine-Tune</strong> atau <strong class="text-neonOrange">Manual Override</strong> untuk kontrol penuh.</span></p>
-                            <p class="flex items-start gap-3"><span class="text-neonBlue text-lg">•</span> <span>Anda prioritas utama — gunakan <strong class="text-white border-b border-neonBlue">VIP Support</strong> kapan saja.</span></p>
+                            <p class="flex items-start gap-3"><span class="text-neonBlue text-lg">•</span> <span class="drop-shadow-md">Gunakan <strong class="text-neonOrange">Mode Fine-Tune</strong> atau <strong class="text-neonOrange">Manual Override</strong> untuk kontrol penuh.</span></p>
+                            <p class="flex items-start gap-3"><span class="text-neonBlue text-lg">•</span> <span class="drop-shadow-md">Anda prioritas utama — gunakan <strong class="text-white border-b border-neonBlue">VIP Support</strong> kapan saja.</span></p>
                         </div>
                     </div>
                 </div>
@@ -505,7 +490,7 @@
                     <p class="text-white font-bold text-lg font-sans drop-shadow-md">
                         <span class="text-neonOrange">AILABS VIP Prime Access</span> — Unlock What Others Can’t.
                     </p>
-                    <p class="text-gray-400 text-sm mt-2 italic">~ Salam dari Bang Pro</p>
+                    <p class="text-gray-400 text-sm mt-2 italic drop-shadow-md">~ Salam dari Bang Pro</p>
                 </div>
             </div>
         </div>
@@ -515,7 +500,7 @@
     <button id="admin-help-button" title="Open Support Channel" 
             class="fixed bottom-8 right-8 z-50 group">
         <div class="absolute inset-0 bg-[#00ff88] rounded-full blur opacity-40 group-hover:opacity-70 transition-opacity duration-300 animate-pulse"></div>
-        <div class="relative bg-black/60 border border-[#00ff88] text-[#00ff88] hover:bg-[#00ff88] hover:text-black rounded-full p-4 transition-all duration-300 shadow-[0_0_15px_rgba(0,255,136,0.3)] backdrop-blur-md">
+        <div class="relative bg-black/40 border border-[#00ff88] text-[#00ff88] hover:bg-[#00ff88] hover:text-black rounded-full p-4 transition-all duration-300 shadow-[0_0_15px_rgba(0,255,136,0.3)] backdrop-blur-md">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </div>
     </button>
@@ -613,20 +598,15 @@
             errorMessage.textContent = '';
         }
 
-        // --- NEW: SIMULASI LIVE USER COUNTER WITH DUAL SERVERS ---
+        // --- NEW: SIMULASI LIVE USER COUNTER WITH DUAL SERVERS (INTEGRATED) ---
         function initFakeOnlineCounter() {
-            const popup = document.getElementById('online-popup');
             const totalSpan = document.getElementById('online-count');
             const idnSpan = document.getElementById('idn-count');
             const usaSpan = document.getElementById('usa-count');
             
-            // 1. Tampilkan Popup dengan animasi
-            popup.classList.remove('hidden');
-            setTimeout(() => {
-                popup.classList.remove('-translate-y-[200%]', 'opacity-0');
-            }, 100);
+            if(!totalSpan || !idnSpan || !usaSpan) return; // Guard clause
 
-            // 2. Set angka awal (random antara 15 - 35 agar lebih humble)
+            // 1. Set angka awal (random antara 15 - 35 agar lebih humble)
             let totalUsers = Math.floor(Math.random() * (35 - 15 + 1) + 15);
             
             // Fungsi update tampilan
@@ -642,7 +622,7 @@
 
             updateDisplay();
 
-            // 3. Simulasi perubahan angka (naik/turun) setiap 3-5 detik
+            // 2. Simulasi perubahan angka (naik/turun) setiap 3-5 detik
             const intervalId = setInterval(() => {
                 // Random change lebih kecil (antara -2 sampai +3)
                 const change = Math.floor(Math.random() * 6) - 2; 
