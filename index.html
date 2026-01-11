@@ -27,6 +27,7 @@
                         'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                         'glow-pulse': 'glowPulse 2s infinite',
                         'float': 'float 6s ease-in-out infinite',
+                        'neon-flicker': 'flicker 3s linear infinite',
                     },
                     keyframes: {
                         glowPulse: {
@@ -65,7 +66,7 @@
             }
         }
 
-        /* Overlay - SUPER TIPIS (Hampir hilang) agar foto jelas */
+        /* Overlay - SUPER TIPIS */
         .bg-overlay {
             position: fixed;
             top: 0;
@@ -75,78 +76,91 @@
             background: 
                 radial-gradient(circle at 15% 15%, rgba(124, 58, 237, 0.05) 0%, transparent 50%),
                 radial-gradient(circle at 85% 85%, rgba(255, 153, 0, 0.05) 0%, transparent 50%),
-                rgba(0, 0, 0, 0.1); /* Opacity dikurangi drastis */
+                rgba(0, 0, 0, 0.1);
             z-index: -1;
         }
 
-        /* ANIMASI POP-UP SLIDE UNTUK ANGKA */
-        @keyframes slidePop {
-            0% {
-                transform: translateY(10px) scale(0.8);
-                opacity: 0;
-            }
-            100% {
-                transform: translateY(0) scale(1); 
-                opacity: 1;
-            }
-        }
-
-        .tick-anim {
-            display: inline-block; 
-            animation: slidePop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); 
-        }
-
-        /* ULTRA CLEAR GLASS PANEL - SANGAT BENING */
+        /* ULTRA CLEAR GLASS PANEL */
         .glass-panel {
-            background: rgba(0, 0, 0, 0.05); /* Hampir transparan total */
-            backdrop-filter: blur(1px); /* Blur sangat minim agar foto di belakang tajam */
+            background: rgba(0, 0, 0, 0.05); 
+            backdrop-filter: blur(1px); 
             -webkit-backdrop-filter: blur(1px);
             border: 1px solid rgba(255, 255, 255, 0.1); 
             border-top: 1px solid rgba(255, 255, 255, 0.2); 
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
         }
 
-        /* Info Box */
-        .info-box {
-            background: rgba(0, 0, 0, 0.2); 
+        /* Tab Navigation dengan Kotak & Lampu Berkedip */
+        .tab-btn {
             position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-left: none;
-            overflow: hidden;
-        }
-        .info-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 3px;
-            height: 100%;
-            background: linear-gradient(to bottom, #FF9900, #7c3aed, #00ffd5);
-            box-shadow: 0 0 15px #FF9900;
+            padding: 10px 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            color: rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex: 1;
+            max-width: 200px;
         }
 
-        /* App Card - Transparan */
+        .tab-btn.active {
+            color: #00ffd5;
+            border: 2px solid #00ffd5;
+            box-shadow: 0 0 15px rgba(0, 255, 213, 0.4), inset 0 0 10px rgba(0, 255, 213, 0.2);
+            animation: flicker 4s linear infinite;
+        }
+
+        @keyframes flicker {
+            0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+                opacity: 1;
+                border-color: #00ffd5;
+                box-shadow: 0 0 15px rgba(0, 255, 213, 0.4), inset 0 0 10px rgba(0, 255, 213, 0.2);
+                text-shadow: 0 0 10px #00ffd5;
+            }
+            20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+                opacity: 0.4;
+                border-color: rgba(0, 255, 213, 0.2);
+                box-shadow: none;
+                text-shadow: none;
+            }
+        }
+
         .app-card {
-            background: rgba(0, 0, 0, 0.15); /* Transparan */
+            background: rgba(0, 0, 0, 0.15); 
             backdrop-filter: blur(0px); 
-            -webkit-backdrop-filter: blur(0px);
-            /* BORDER TEBAL & NEON */
             border: 2px solid rgba(0, 255, 213, 0.5); 
             box-shadow: 0 0 15px rgba(0, 255, 213, 0.15);
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
         }
-
         .app-card:hover {
             transform: translateY(-5px);
             background: rgba(0, 0, 0, 0.4); 
-            /* Hover Effect: Border Solid & Glow Kuat */
             border-color: #00ffd5;
             box-shadow: 0 0 30px rgba(0, 255, 213, 0.4), inset 0 0 10px rgba(0, 255, 213, 0.1);
         }
-        
-        /* Input Field */
+
+        .tutorial-card, .framework-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 153, 0, 0.3);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(2px);
+        }
+        .tutorial-card:hover, .framework-card:hover {
+            border-color: #FF9900;
+            box-shadow: 0 0 20px rgba(255, 153, 0, 0.2);
+            transform: translateY(-4px);
+        }
+
         .input-tech {
             background: rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.3);
@@ -164,7 +178,6 @@
             outline: none;
         }
 
-        /* Tombol Cyber */
         .btn-cyber {
             background: rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(0, 255, 213, 0.6);
@@ -172,8 +185,6 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             font-family: 'Orbitron', sans-serif;
-            position: relative;
-            overflow: hidden;
             transition: all 0.3s ease;
             text-shadow: 0 0 5px rgba(0,0,0,1);
             font-weight: 800;
@@ -185,33 +196,38 @@
             box-shadow: 0 0 20px rgba(0, 255, 213, 0.3);
         }
 
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
+        .info-box {
+            background: rgba(0, 0, 0, 0.2); 
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: none;
+            overflow: hidden;
         }
-        ::-webkit-scrollbar-track {
-            background: transparent;
+        .info-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 3px; height: 100%;
+            background: linear-gradient(to bottom, #FF9900, #7c3aed, #00ffd5);
+            box-shadow: 0 0 15px #FF9900;
         }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 10px;
+
+        @keyframes slidePop {
+            0% { transform: translateY(10px) scale(0.8); opacity: 0; }
+            100% { transform: translateY(0) scale(1); opacity: 1; }
         }
+        .tick-anim {
+            display: inline-block; 
+            animation: slidePop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); 
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.3); border-radius: 10px; }
     </style>
 </head>
 <body class="text-gray-100 min-h-screen flex items-center justify-center p-4 selection:bg-neonOrange selection:text-black">
 
-    <!-- Overlay -->
     <div class="bg-overlay"></div>
-
-    <!-- Logo -->
-    <img src="./logo.png" alt="Logo AIlabs" 
-         class="fixed top-8 right-8 w-16 h-auto z-50 opacity-90 hover:opacity-100 transition-opacity duration-300 filter drop-shadow-[0_0_10px_rgba(0,255,213,0.8)]"
-         onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='flex'">
-    
-    <!-- Fallback Logo -->
-    <div id="fallback-logo" class="fixed top-8 right-8 z-50 opacity-90 hover:opacity-100 transition-opacity duration-300 filter drop-shadow-[0_0_15px_rgba(0,255,213,0.6)] bg-black/30 p-2 rounded-full border border-neonBlue hidden justify-center items-center backdrop-blur-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00ffd5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-    </div>
 
     <!-- 1. LOGIN PAGE -->
     <div id="login-page" class="w-full max-w-md relative z-10">
@@ -221,10 +237,10 @@
 
             <div class="text-center mb-12 relative z-10">
                 <h1 class="text-5xl font-tech font-bold text-white mb-3 tracking-wider drop-shadow-[0_4px_4px_rgba(0,0,0,1)]">
-                    <span class="text-neonOrange drop-shadow-[0_0_15px_rgba(255,153,0,0.8)]">AI</span><span class="text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.6)]">LABS</span>
+                    <span class="text-neonOrange drop-shadow-[0_0_15px_rgba(255,153,0,0.8)]">AI</span>LABS
                 </h1>
                 <div class="h-px w-32 bg-gradient-to-r from-transparent via-neonBlue to-transparent mx-auto mb-6 opacity-80 shadow-[0_0_10px_#00ffd5]"></div>
-                <span class="inline-block bg-black/20 border border-white/20 text-neonBlue text-xs font-bold tracking-[0.25em] uppercase px-3 py-1 rounded-full backdrop-blur-none shadow-lg">VIP Prime Access</span>
+                <span class="inline-block bg-black/20 border border-white/20 text-neonBlue text-xs font-bold tracking-[0.25em] uppercase px-3 py-1 rounded-full shadow-lg">VIP Prime Access</span>
             </div>
             
             <div class="mb-8 relative z-10">
@@ -258,25 +274,16 @@
     <div id="portal-page" class="w-full max-w-7xl p-4 hidden relative z-10">
         <div class="glass-panel rounded-3xl p-6 md:p-10">
             
-            <!-- HEADER (COMPACT LAYOUT) -->
-            <div class="mb-10 border-b border-white/10 pb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
-                
-                <!-- Left: Titles -->
-                <div class="max-w-2xl">
-                    <h1 class="text-xl md:text-3xl font-bold text-white tracking-tight font-tech mb-4 leading-tight drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]">
-                        <!-- UPDATED: WELCOME & AILABS digabung satu baris, VIP di bawahnya -->
-                        <span class="text-neonOrange drop-shadow-[0_0_10px_rgba(255,153,0,0.5)] block mb-1">⚡ WELCOME AILABS</span>
-                        <span class="text-neonBlue drop-shadow-[0_0_8px_rgba(0,255,213,0.5)] block text-lg md:text-2xl">VIP Prime Access</span>
+            <!-- HEADER -->
+            <div class="mb-8 border-b border-white/10 pb-6 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+                <div>
+                    <h1 class="text-xl md:text-3xl font-bold text-white tracking-tight font-tech mb-2 leading-tight drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]">
+                        <span class="text-neonOrange block mb-1">⚡ WELCOME AILABS</span>
+                        <span class="text-neonBlue text-lg md:text-2xl">VIP Prime Access</span>
                     </h1>
-                    <p class="text-gray-100 text-sm md:text-base leading-relaxed border-l-2 border-neonBlue pl-4 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] font-medium">
-                        Selamat Tahun Baru untuk seluruh Mbelgedez Community. Semoga di tahun yang baru ini kita diberikan kesehatan, kekompakan, dan semangat untuk terus berkembang serta membawa hal-hal positif bagi komunitas dan sekitar. Salam hormat dan sukses selalu.
-                    </p>
                 </div>
                 
-                <!-- Right: Status, Logout & Traffic (COMPACT & CLEAN) -->
                 <div class="flex flex-col items-end gap-3 w-full md:w-auto">
-                    
-                    <!-- Row 1: Account Status & Logout -->
                     <div class="flex items-center justify-end gap-4 w-full">
                         <div class="text-right">
                             <span class="text-[9px] text-gray-300 uppercase tracking-widest block mb-0.5 font-bold shadow-black drop-shadow-md">Status</span>
@@ -286,510 +293,286 @@
                             LOGOUT
                         </button>
                     </div>
-
-                    <!-- Row 2: Compact Traffic Monitor -->
-                    <div class="bg-black/40 border border-white/10 rounded-lg px-3 py-2 flex items-center gap-3 backdrop-blur-sm shadow-lg w-full md:w-auto justify-between md:justify-end">
-                        <div class="flex items-center gap-2 border-r border-white/10 pr-3">
-                            <span class="relative flex h-2 w-2">
-                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
-                              <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500 shadow-[0_0_8px_#22c55e]"></span>
-                            </span>
-                            <span class="text-[10px] text-white font-bold uppercase tracking-wide drop-shadow-md">Online</span>
-                        </div>
-                        
+                    <div class="bg-black/40 border border-white/10 rounded-lg px-3 py-2 flex items-center gap-3 backdrop-blur-sm shadow-lg">
+                        <span class="relative flex h-2 w-2">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500 shadow-[0_0_8px_#22c55e]"></span>
+                        </span>
+                        <span class="text-[10px] text-white font-bold uppercase tracking-wide drop-shadow-md">Online</span>
                         <div class="flex gap-3 text-[10px] font-mono font-bold text-gray-300">
-                            <span class="flex items-center gap-1 drop-shadow-md"><span class="grayscale-0">🇮🇩</span> <span id="srv1-count" class="text-neonBlue tick-anim">0</span></span>
-                            <span class="flex items-center gap-1 drop-shadow-md"><span class="grayscale-0">🇺🇸</span> <span id="srv2-count" class="text-neonOrange tick-anim">0</span></span>
-                            <span class="flex items-center gap-1 drop-shadow-md"><span class="grayscale-0">🇸🇬</span> <span id="srv3-count" class="text-purple-400 tick-anim">0</span></span>
+                            <span>🇮🇩 <span id="srv1-count" class="text-neonBlue tick-anim">0</span></span>
+                            <span>🇺🇸 <span id="srv2-count" class="text-neonOrange tick-anim">0</span></span>
+                            <span>🇸🇬 <span id="srv3-count" class="text-purple-400 tick-anim">0</span></span>
                         </div>
                     </div>
-
                 </div>
             </div>
 
-            <!-- GRID APLIKASI (Judul dengan Neon Glow & Border Tebal) -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
-
-                <!-- NEW ADDITION: ailabs scene -->
-                <a href="https://gemini.google.com/share/d930e866826f" target="_blank"
-                   class="block app-card p-6 rounded-2xl group relative overflow-hidden">
-                    <div class="absolute inset-0 bg-neonBlue/5 animate-pulse-fast"></div>
-                    <div class="absolute top-3 right-3">
-                        <span class="text-[10px] bg-neonOrange text-white font-bold px-2 py-0.5 rounded shadow-[0_0_10px_#FF9900] animate-glow-pulse backdrop-blur-none bg-black/40">NEW</span>
-                    </div>
-
-                    <div class="mb-4 text-neonOrange group-hover:scale-110 transition-transform origin-left drop-shadow-[0_0_5px_rgba(255,153,0,0.8)] relative z-10">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19.8 19.8A10 10 0 1 0 4.2 4.2a10 10 0 0 0 15.6 15.6z"/><path d="M21 16l-4-1.5"/><path d="M11 11l4 1.5"/><path d="M16 21l-1.5-4"/><path d="M9 5l1.5 4"/></svg>
-                    </div>
-
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors relative z-10 drop-shadow-[0_0_8px_rgba(0,255,213,0.8)]">Ailabs scene v2</h3>
-                    <p class="text-xs text-gray-200 group-hover:text-white relative z-10 font-medium drop-shadow-md">Scene creation tool.</p>
-                </a>
-
-                <!-- NEW: Prompt Suno Style -->
-                <a href="https://gemini.google.com/share/6a3f36032542" target="_blank"
-                   class="block app-card p-6 rounded-2xl group relative overflow-hidden">
-                    <div class="absolute inset-0 bg-neonBlue/5 animate-pulse-fast"></div>
-                    <div class="absolute top-3 right-3">
-                        <span class="text-[10px] bg-neonOrange text-white font-bold px-2 py-0.5 rounded shadow-[0_0_10px_#FF9900] animate-glow-pulse backdrop-blur-none bg-black/40">NEW</span>
-                    </div>
-                    
-                    <div class="mb-4 text-neonOrange group-hover:scale-110 transition-transform origin-left drop-shadow-[0_0_5px_rgba(255,153,0,0.8)] relative z-10">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-                    </div>
-
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors relative z-10 drop-shadow-[0_0_8px_rgba(0,255,213,0.8)]">Prompt Suno Style</h3>
-                    <p class="text-xs text-gray-200 group-hover:text-white relative z-10 font-medium drop-shadow-md">Generator gaya musik.</p>
-                </a>
-
-                <!-- NEW: Music Mastering -->
-                <a href="https://masteraudio.pro" target="_blank"
-                   class="block app-card p-6 rounded-2xl group relative overflow-hidden">
-                    <div class="absolute inset-0 bg-neonBlue/5 animate-pulse-fast"></div>
-                    <div class="absolute top-3 right-3">
-                        <span class="text-[10px] bg-neonBlue text-black font-bold px-2 py-0.5 rounded shadow-[0_0_10px_#00ffd5] animate-glow-pulse backdrop-blur-none bg-white/80">NEW</span>
-                    </div>
-                    
-                    <div class="mb-4 text-neonBlue group-hover:scale-110 transition-transform origin-left drop-shadow-[0_0_5px_rgba(0,255,213,0.8)] relative z-10">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="4" y1="21" y2="14"/><line x1="4" x2="4" y1="10" y2="3"/><line x1="12" x2="12" y1="21" y2="12"/><line x1="12" x2="12" y1="8" y2="3"/><line x1="20" x2="20" y1="21" y2="16"/><line x1="20" x2="20" y1="12" y2="3"/><line x1="1" x2="7" y1="14" y2="14"/><line x1="9" x2="15" y1="8" y2="8"/><line x1="17" x2="23" y1="16" y2="16"/></svg>
-                    </div>
-
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors relative z-10 drop-shadow-[0_0_8px_rgba(0,255,213,0.8)]">Music Mastering</h3>
-                    <p class="text-xs text-gray-200 group-hover:text-white relative z-10 font-medium drop-shadow-md">Audio polish pro.</p>
-                </a>
-
-                <!-- NEW: Ailabs UMKM poster -->
-                <a href="https://gemini.google.com/share/9c2a5dfaf7f0" target="_blank"
-                   class="block app-card p-6 rounded-2xl group relative overflow-hidden">
-                    <div class="absolute inset-0 bg-neonBlue/5 animate-pulse-fast"></div>
-                    <div class="absolute top-3 right-3">
-                        <span class="text-[10px] bg-neonOrange text-white font-bold px-2 py-0.5 rounded shadow-[0_0_10px_#FF9900] animate-glow-pulse backdrop-blur-none bg-black/40">NEW</span>
-                    </div>
-                    
-                    <div class="mb-4 text-neonOrange group-hover:scale-110 transition-transform origin-left drop-shadow-[0_0_5px_rgba(255,153,0,0.8)] relative z-10">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                    </div>
-
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors relative z-10 drop-shadow-[0_0_8px_rgba(0,255,213,0.8)]">Ailabs UMKM poster</h3>
-                    <p class="text-xs text-gray-200 group-hover:text-white relative z-10 font-medium drop-shadow-md">Solusi poster bisnis.</p>
-                </a>
-
-                <!-- NEW: Simple Studio Labs (Updated from AI studio pro) -->
-                <a href="https://gemini.google.com/share/5ed26905bfe9" target="_blank"
-                   class="block app-card p-6 rounded-2xl group relative overflow-hidden">
-                    <div class="absolute inset-0 bg-neonBlue/5 animate-pulse-fast"></div>
-                    <div class="absolute top-3 right-3">
-                        <span class="text-[10px] bg-neonBlue text-black font-bold px-2 py-0.5 rounded shadow-[0_0_10px_#00ffd5] animate-glow-pulse backdrop-blur-none bg-white/80">PRO</span>
-                    </div>
-                    
-                    <div class="mb-4 text-neonBlue group-hover:scale-110 transition-transform origin-left drop-shadow-[0_0_5px_rgba(0,255,213,0.8)] relative z-10">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-                    </div>
-
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors relative z-10 drop-shadow-[0_0_8px_rgba(0,255,213,0.8)]">Simple Studio Labs</h3>
-                    <p class="text-xs text-gray-200 group-hover:text-white relative z-10 font-medium drop-shadow-md">Professional creation suite.</p>
-                </a>
-
-                <!-- 0. Ailabs Studio Pro V1 -->
-                <a href="https://gemini.google.com/share/521d898002e6" target="_blank"
-                   class="block app-card p-6 rounded-2xl group relative overflow-hidden">
-                    <div class="absolute inset-0 bg-neonBlue/5 animate-pulse-fast"></div>
-                    <div class="absolute top-3 right-3">
-                        <span class="text-[10px] bg-neonOrange text-white font-bold px-2 py-0.5 rounded shadow-[0_0_10px_#FF9900] animate-glow-pulse backdrop-blur-none bg-black/40">STUDIO PRO</span>
-                    </div>
-                    
-                    <div class="mb-4 text-neonBlue group-hover:scale-110 transition-transform origin-left drop-shadow-[0_0_5px_rgba(0,255,213,0.8)] relative z-10">
-                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-                    </div>
-
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors relative z-10 drop-shadow-[0_0_8px_rgba(0,255,213,0.8)]">Ailabs Studio Pro V1</h3>
-                    <p class="text-xs text-gray-200 group-hover:text-white relative z-10 font-medium drop-shadow-md">Ultimate creative studio.</p>
-                </a>
-
-                <!-- Restore Image -->
-                <a href="https://gemini.google.com/share/7082a8de4d9b" target="_blank"
-                   class="block app-card p-6 rounded-2xl group relative overflow-hidden">
-                    <div class="absolute inset-0 bg-neonBlue/5 animate-pulse-fast"></div>
-                    <div class="absolute top-3 right-3">
-                        <span class="text-[10px] bg-neonBlue text-black font-bold px-2 py-0.5 rounded shadow-[0_0_10px_#00ffd5] animate-glow-pulse backdrop-blur-none bg-white/80">NEW</span>
-                    </div>
-
-                    <div class="mb-4 text-neonBlue group-hover:scale-110 transition-transform origin-left drop-shadow-[0_0_5px_rgba(0,255,213,0.8)] relative z-10">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/><path d="m14 6 5.5 5.5"/><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9.5"/></svg>
-                    </div>
-
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors relative z-10 drop-shadow-[0_0_8px_rgba(0,255,213,0.8)]">Restore Image</h3>
-                    <p class="text-xs text-gray-200 group-hover:text-white relative z-10 font-medium drop-shadow-md">Restorasi foto lama.</p>
-                </a>
-
-                <!-- 1. AIlabs V1 -->
-                <a href="https://gemini.google.com/share/eed4e9937fb9" target="_blank"
-                   class="block app-card p-6 rounded-2xl group">
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors drop-shadow-[0_0_8px_rgba(0,255,213,0.8)]">AIlabs V1 (Legacy)</h3>
-                    <p class="text-xs text-gray-200 font-medium drop-shadow-md">Previous version.</p>
-                </a>
-
-                <!-- 2. AIlabs V2 -->
-                <a href="https://gemini.google.com/share/1ecc7240fb7a" target="_blank"
-                   class="block app-card p-6 rounded-2xl group">
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors drop-shadow-[0_0_8px_rgba(0,255,213,0.8)]">AIlabs V2 (Legacy)</h3>
-                    <p class="text-xs text-gray-200 font-medium drop-shadow-md">Previous version.</p>
-                </a>
-
-                <!-- 3. Suite V3 -->
-                <a href="https://gemini.google.com/share/77fddccf2a05" target="_blank"
-                   class="block app-card p-6 rounded-2xl group relative overflow-hidden">
-                    <div class="absolute inset-0 bg-neonBlue/5 animate-pulse-fast"></div>
-
-                    <div class="absolute top-3 right-3">
-                        <span class="text-[10px] bg-neonBlue text-black font-bold px-2 py-0.5 rounded shadow-[0_0_10px_#00ffd5] animate-glow-pulse backdrop-blur-none bg-white/80">NEW UPDATE</span>
-                    </div>
-
-                    <div class="mb-4 text-neonOrange group-hover:scale-110 transition-transform origin-left drop-shadow-[0_0_5px_rgba(255,153,0,0.8)] relative z-10">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
-                    </div>
-                    <div class="flex justify-between items-center mb-1 relative z-10">
-                        <h3 class="text-2xl font-bold text-white group-hover:text-neonBlue transition-colors drop-shadow-[0_0_8px_rgba(0,255,213,0.8)]">AIlabs Suite V3</h3>
-                    </div>
-                    <p class="text-sm text-gray-200 relative z-10 font-medium drop-shadow-md">All-in-one toolkit.</p>
-                </a>
-
-                <!-- 4. Ailabs Voice Over V2 -->
-                <a href="https://gemini.google.com/share/ef6398e3bcbc" target="_blank"
-                   class="block app-card p-6 rounded-2xl group relative overflow-hidden border-l-4 border-l-neonBlue/50">
-                    
-                    <div class="flex justify-between items-start mb-4 relative z-10">
-                        <div class="p-2 bg-neonBlue/20 rounded-lg text-neonBlue group-hover:text-white group-hover:bg-neonBlue transition-colors shadow-[0_0_10px_rgba(0,255,213,0.4)] backdrop-blur-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
-                        </div>
-                    </div>
-                    
-                    <div class="flex justify-between items-center mb-2 relative z-10">
-                        <h3 class="text-2xl font-bold text-white group-hover:text-neonBlue transition-colors drop-shadow-[0_0_8px_rgba(0,255,213,0.8)]">AIlabs Voice Over V2</h3>
-                        <span class="text-[9px] bg-neonBlue/10 text-neonBlue border border-neonBlue/50 font-bold px-1.5 py-0.5 rounded-sm backdrop-blur-none bg-black/40">V2.0</span>
-                    </div>
-                    <p class="text-sm text-gray-200 leading-relaxed group-hover:text-white relative z-10 drop-shadow-md">Advanced Audio Synthesis.</p>
-                </a>
-
-                <!-- 5. FLUX V2 -->
-                <a href="https://gemini.google.com/share/849a5535cdc5" target="_blank"
-                   class="block app-card p-6 rounded-2xl group border-l-4 border-l-neonOrange/50 relative overflow-hidden">
-                    <div class="absolute inset-0 bg-neonBlue/5 animate-pulse-fast"></div>
-                    <div class="absolute top-3 right-3">
-                        <span class="text-[10px] bg-neonBlue text-black font-bold px-2 py-0.5 rounded shadow-[0_0_10px_#00ffd5] animate-glow-pulse backdrop-blur-none bg-white/80">NEW UPDATE</span>
-                    </div>
-
-                    <div class="flex justify-between items-start mb-4 relative z-10">
-                        <div class="p-2 bg-neonOrange/20 rounded-lg text-neonOrange group-hover:text-white group-hover:bg-neonOrange transition-colors shadow-[0_0_10px_rgba(255,153,0,0.4)] backdrop-blur-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/><path d="M8.5 8.5a2.5 2.5 0 0 1 0 5"/></svg>
-                        </div>
-                    </div>
-                    <div class="flex justify-between items-center mb-2 relative z-10">
-                        <h3 class="text-2xl font-bold text-white group-hover:text-neonBlue transition-colors drop-shadow-[0_0_8px_rgba(0,255,213,0.8)]">AIlabs Flux V2</h3>
-                        <span class="text-[9px] bg-neonBlue/10 text-neonBlue border border-neonBlue/50 font-bold px-1.5 py-0.5 rounded-sm backdrop-blur-none bg-black/40">V2.0</span>
-                    </div>
-                    <p class="text-sm text-gray-200 leading-relaxed group-hover:text-white relative z-10 drop-shadow-md">Core visual engine terbaru.</p>
-                </a>
-
-                <!-- 6. Affiliate V1 -->
-                <a href="https://gemini.google.com/share/d9800cca2fa0" target="_blank"
-                   class="block app-card p-6 rounded-2xl group border-dashed border border-gray-600 hover:border-green-500">
-                    <div class="mb-4 text-green-500 drop-shadow-[0_0_5px_rgba(34,197,94,0.8)]">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-1 group-hover:text-green-400 transition-colors drop-shadow-[0_0_8px_rgba(0,255,213,0.8)]">AIlabs Affiliate V1</h3>
-                    <p class="text-xs text-gray-200 font-medium drop-shadow-md">Partnership program.</p>
-                </a>
-
-                <!-- 7. Remix Prompt -->
-                <a href="https://gemini.google.com/share/0e8e26df42ff" target="_blank"
-                   class="block app-card p-6 rounded-2xl group relative overflow-hidden">
-                    
-                    <div class="mb-4 p-2 w-fit rounded-md bg-blue-900/40 text-neonBlue border border-neonBlue/20 relative z-10 backdrop-blur-sm">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-1 group-hover:text-neonBlue transition-colors relative z-10 drop-shadow-[0_0_8px_rgba(0,255,213,0.8)]">AIlabs Remix Prompt</h3>
-                    <p class="text-xs text-gray-200 group-hover:text-white relative z-10 font-medium drop-shadow-md">Prompt variation engine.</p>
-                </a>
-
-                <!-- 8. Pose -->
-                <a href="https://gemini.google.com/share/210f872b73ca" target="_blank"
-                   class="block app-card p-6 rounded-2xl group">
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors drop-shadow-[0_0_8px_rgba(0,255,213,0.8)]">AIlabs Pose Control</h3>
-                    <p class="text-xs text-gray-200 font-medium drop-shadow-md">Presisi karakter.</p>
-                </a>
-
-                <!-- 9. Efek Prompt -->
-                <a href="https://g.co/gemini/share/ddfcd83d75e4" target="_blank"
-                   class="block app-card p-6 rounded-2xl group">
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors drop-shadow-[0_0_8px_rgba(0,255,213,0.8)]">AIlabs Efek Prompt</h3>
-                    <p class="text-xs text-gray-200 font-medium drop-shadow-md">Visual styling.</p>
-                </a>
-
-                <!-- 10. Asisten -->
-                <a href="https://gemini.google.com/share/bdd057d246d0" target="_blank"
-                   class="block app-card p-6 rounded-2xl group">
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors drop-shadow-[0_0_8px_rgba(0,255,213,0.8)]">AIlabs Asisten Pro</h3>
-                    <p class="text-xs text-gray-200 font-medium drop-shadow-md">Personal assistant.</p>
-                </a>
-
-                <!-- 11. Cartoon -->
-                <a href="https://gemini.google.com/share/226091114d5e" target="_blank"
-                   class="block app-card p-6 rounded-2xl group relative overflow-hidden">
-                    <div class="absolute inset-0 bg-neonBlue/5 animate-pulse-fast"></div>
-                    <div class="absolute top-3 right-3">
-                        <span class="text-[10px] bg-neonBlue text-black font-bold px-2 py-0.5 rounded shadow-[0_0_10px_#00ffd5] animate-glow-pulse backdrop-blur-none bg-white/80">NEW UPDATE</span>
-                    </div>
-                    
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors relative z-10 drop-shadow-[0_0_8px_rgba(0,255,213,0.8)]">AIlabs Cartoon FX</h3>
-                    <p class="text-xs text-gray-200 group-hover:text-white relative z-10 font-medium drop-shadow-md">Kartun instan.</p>
-                </a>
-
-                <!-- 12. Flux Basic -->
-                <a href="https://gemini.google.com/share/172e691c4663" target="_blank"
-                   class="block app-card p-6 rounded-2xl group">
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors drop-shadow-[0_0_8px_rgba(0,255,213,0.8)]">AIlabs Flux Basic</h3>
-                    <p class="text-xs text-gray-200 font-medium drop-shadow-md">Versi standar.</p>
-                </a>
-
-                <!-- 13. Voice Over -->
-                <a href="https://gemini.google.com/share/b3fe8cfbcae5" target="_blank"
-                   class="block app-card p-6 rounded-2xl group">
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors drop-shadow-[0_0_8px_rgba(0,255,213,0.8)]">AIlabs Voice Over</h3>
-                    <p class="text-xs text-gray-200 font-medium drop-shadow-md">Audio synthesis.</p>
-                </a>
-
-                <!-- 14. Prompt Transformer -->
-                <a href="https://gemini.google.com/share/6a35693cefd1" target="_blank"
-                   class="block app-card p-6 rounded-2xl group">
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors drop-shadow-[0_0_8px_rgba(0,255,213,0.8)]">AIlabs Prompt Transformer</h3>
-                    <p class="text-xs text-gray-200 font-medium drop-shadow-md">Text optimizer.</p>
-                </a>
-
-                <!-- 15. Bang Pro Toolkit -->
-                <a href="https://bangpro-toolkit.vercel.app/" target="_blank"
-                   class="block app-card p-6 rounded-2xl group border-dashed border border-gray-600 hover:border-neonBlue/50">
-                    <h3 class="text-xl font-bold text-neonBlue mb-2 group-hover:drop-shadow-[0_0_5px_#00ffd5] transition-all drop-shadow-[0_0_8px_rgba(0,255,213,0.8)]">🌐 Bang Pro Toolkit</h3>
-                    <p class="text-xs text-gray-200 font-medium drop-shadow-md">Akses member gratis.</p>
-                </a>
+            <!-- TAB NAVIGATION -->
+            <div class="flex flex-wrap gap-4 mb-10 border-b border-white/5 pb-4">
+                <button onclick="switchTab('apps')" id="tab-apps" class="tab-btn active">
+                    APPLICATIONS
+                </button>
+                <button onclick="switchTab('tutorial')" id="tab-tutorial" class="tab-btn">
+                    TUTORIALS
+                </button>
+                <button onclick="switchTab('framework')" id="tab-framework" class="tab-btn">
+                    PROMPT FRAMEWORK
+                </button>
             </div>
 
-            <!-- FOOTER AREA -->
-            <div class="border-t border-white/10 pt-8">
-                <div class="info-box p-6 mb-8 shadow-[0_0_30px_rgba(0,255,213,0.05)] rounded-r-xl">
-                    <h3 class="mb-4 font-tech tracking-wide">
-                        <span class="inline-block bg-white/5 text-neonBlue font-bold px-3 py-1 rounded shadow-[0_0_10px_rgba(0,255,213,0.2)] animate-glow-pulse uppercase text-base border border-neonBlue/50 backdrop-blur-md">⚠ CATATAN</span>
-                    </h3>
+            <!-- TAB CONTENT: APPLICATIONS (22 APLIKASI UTUH) -->
+            <div id="content-apps">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
+                    <!-- Urutan Tetap: Ailabs Studio Pro V1 paling atas -->
+                    <a href="https://gemini.google.com/share/521d898002e6" target="_blank" class="block app-card p-6 rounded-2xl group relative overflow-hidden">
+                        <div class="absolute inset-0 bg-neonBlue/5 animate-pulse-fast"></div>
+                        <div class="absolute top-3 right-3"><span class="text-[10px] bg-neonOrange text-white font-bold px-2 py-0.5 rounded shadow-[0_0_10px_#FF9900] animate-glow-pulse bg-black/40">STUDIO PRO</span></div>
+                        <div class="mb-4 text-neonBlue group-hover:scale-110 transition-transform origin-left drop-shadow-[0_0_5px_rgba(0,255,213,0.8)] relative z-10">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors relative z-10">Ailabs Studio Pro V1</h3>
+                        <p class="text-xs text-gray-200 group-hover:text-white relative z-10 font-medium drop-shadow-md">Ultimate creative studio.</p>
+                    </a>
+
+                    <!-- Aplikasi Lainnya -->
+                    <a href="https://gemini.google.com/share/d930e866826f" target="_blank" class="block app-card p-6 rounded-2xl group relative overflow-hidden">
+                        <div class="absolute inset-0 bg-neonBlue/5 animate-pulse-fast"></div>
+                        <div class="absolute top-3 right-3"><span class="text-[10px] bg-neonOrange text-white font-bold px-2 py-0.5 rounded shadow-[0_0_10px_#FF9900] animate-glow-pulse bg-black/40">NEW</span></div>
+                        <div class="mb-4 text-neonOrange group-hover:scale-110 transition-transform origin-left relative z-10"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19.8 19.8A10 10 0 1 0 4.2 4.2a10 10 0 0 0 15.6 15.6z"/><path d="M21 16l-4-1.5"/><path d="M11 11l4 1.5"/><path d="M16 21l-1.5-4"/><path d="M9 5l1.5 4"/></svg></div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors relative z-10">Ailabs scene v2</h3>
+                        <p class="text-xs text-gray-200 font-medium drop-shadow-md">Scene creation tool.</p>
+                    </a>
+                    <a href="https://gemini.google.com/share/6a3f36032542" target="_blank" class="block app-card p-6 rounded-2xl group"><div class="mb-4 text-neonOrange relative z-10"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors relative z-10">Prompt Suno Style</h3><p class="text-xs text-gray-200 font-medium">Generator gaya musik.</p></a>
+                    <a href="https://masteraudio.pro" target="_blank" class="block app-card p-6 rounded-2xl group"><div class="mb-4 text-neonBlue relative z-10"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="4" y1="21" y2="14"/><line x1="4" x2="4" y1="10" y2="3"/><line x1="12" x2="12" y1="21" y2="12"/><line x1="12" x2="12" y1="8" y2="3"/><line x1="20" x2="20" y1="21" y2="16"/><line x1="20" x2="20" y1="12" y2="3"/><line x1="1" x2="7" y1="14" y2="14"/><line x1="9" x2="15" y1="8" y2="8"/><line x1="17" x2="23" y1="16" y2="16"/></svg></div><h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors relative z-10">Music Mastering</h3><p class="text-xs text-gray-200 font-medium">Audio polish pro.</p></a>
+                    <a href="https://gemini.google.com/share/9c2a5dfaf7f0" target="_blank" class="block app-card p-6 rounded-2xl group"><div class="mb-4 text-neonOrange relative z-10"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors relative z-10">Ailabs UMKM poster</h3><p class="text-xs text-gray-200 font-medium">Solusi poster bisnis.</p></a>
+                    <a href="https://gemini.google.com/share/5ed26905bfe9" target="_blank" class="block app-card p-6 rounded-2xl group"><div class="mb-4 text-neonBlue relative z-10"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors relative z-10">Simple Studio Labs</h3><p class="text-xs text-gray-200 font-medium">Professional creation suite.</p></a>
+                    <a href="https://gemini.google.com/share/7082a8de4d9b" target="_blank" class="block app-card p-6 rounded-2xl group"><div class="mb-4 text-neonBlue relative z-10"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/><path d="m14 6 5.5 5.5"/><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9.5"/></svg></div><h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors relative z-10">Restore Image</h3><p class="text-xs text-gray-200 font-medium">Restorasi foto lama.</p></a>
+                    <a href="https://gemini.google.com/share/77fddccf2a05" target="_blank" class="block app-card p-6 rounded-2xl group"><div class="mb-4 text-neonOrange relative z-10"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg></div><h3 class="text-xl font-bold text-white mb-1 group-hover:text-neonBlue transition-colors">AIlabs Suite V3</h3><p class="text-sm text-gray-200 font-medium">All-in-one toolkit.</p></a>
+                    <a href="https://gemini.google.com/share/ef6398e3bcbc" target="_blank" class="block app-card p-6 rounded-2xl group border-l-4 border-l-neonBlue/50"><div class="flex justify-between items-center mb-2 relative z-10"><h3 class="text-2xl font-bold text-white group-hover:text-neonBlue transition-colors">AIlabs Voice Over V2</h3><span class="text-[9px] bg-neonBlue/10 text-neonBlue border border-neonBlue/50 font-bold px-1.5 py-0.5 rounded-sm bg-black/40">V2.0</span></div><p class="text-sm text-gray-200 leading-relaxed font-medium">Advanced Audio Synthesis.</p></a>
+                    <a href="https://gemini.google.com/share/849a5535cdc5" target="_blank" class="block app-card p-6 rounded-2xl group border-l-4 border-l-neonOrange/50"><div class="flex justify-between items-center mb-2 relative z-10"><h3 class="text-2xl font-bold text-white group-hover:text-neonBlue transition-colors">AIlabs Flux V2</h3><span class="text-[9px] bg-neonBlue/10 text-neonBlue border border-neonBlue/50 font-bold px-1.5 py-0.5 rounded-sm bg-black/40">V2.0</span></div><p class="text-sm text-gray-200 font-medium">Core visual engine terbaru.</p></a>
+                    <a href="https://gemini.google.com/share/d9800cca2fa0" target="_blank" class="block app-card p-6 rounded-2xl group border-dashed border border-gray-600 hover:border-green-500"><div class="mb-4 text-green-500 group-hover:scale-110 transition-transform"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h3 class="text-xl font-bold text-white mb-1 group-hover:text-green-400">AIlabs Affiliate V1</h3><p class="text-xs text-gray-200 font-medium">Partnership program.</p></a>
+                    <a href="https://gemini.google.com/share/0e8e26df42ff" target="_blank" class="block app-card p-6 rounded-2xl group"><div class="mb-4 p-2 w-fit rounded-md bg-blue-900/40 text-neonBlue border border-neonBlue/20 relative z-10"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div><h3 class="text-xl font-bold text-white mb-1 group-hover:text-neonBlue transition-colors relative z-10">AIlabs Remix Prompt</h3><p class="text-xs text-gray-200 font-medium">Prompt variation engine.</p></a>
+                    <a href="https://gemini.google.com/share/210f872b73ca" target="_blank" class="block app-card p-6 rounded-2xl group"><h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors">AIlabs Pose Control</h3><p class="text-xs text-gray-200 font-medium">Presisi karakter.</p></a>
+                    <a href="https://g.co/gemini/share/ddfcd83d75e4" target="_blank" class="block app-card p-6 rounded-2xl group"><h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors">AIlabs Efek Prompt</h3><p class="text-xs text-gray-200 font-medium">Visual styling.</p></a>
+                    <a href="https://gemini.google.com/share/bdd057d246d0" target="_blank" class="block app-card p-6 rounded-2xl group"><h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors">AIlabs Asisten Pro</h3><p class="text-xs text-gray-200 font-medium">Personal assistant.</p></a>
+                    <a href="https://gemini.google.com/share/226091114d5e" target="_blank" class="block app-card p-6 rounded-2xl group"><h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors relative z-10">AIlabs Cartoon FX</h3><p class="text-xs text-gray-200 font-medium">Kartun instan.</p></a>
+                    <a href="https://gemini.google.com/share/172e691c4663" target="_blank" class="block app-card p-6 rounded-2xl group"><h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors">AIlabs Flux Basic</h3><p class="text-xs text-gray-200 font-medium">Versi standar.</p></a>
+                    <a href="https://gemini.google.com/share/b3fe8cfbcae5" target="_blank" class="block app-card p-6 rounded-2xl group"><h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors">AIlabs Voice Over</h3><p class="text-xs text-gray-200 font-medium">Audio synthesis.</p></a>
+                    <a href="https://gemini.google.com/share/6a35693cefd1" target="_blank" class="block app-card p-6 rounded-2xl group"><h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors">AIlabs Prompt Transformer</h3><p class="text-xs text-gray-200 font-medium">Text optimizer.</p></a>
+                    <a href="https://gemini.google.com/share/eed4e9937fb9" target="_blank" class="block app-card p-6 rounded-2xl group"><h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors">AIlabs V1 (Legacy)</h3><p class="text-xs text-gray-200 font-medium">Previous version.</p></a>
+                    <a href="https://gemini.google.com/share/1ecc7240fb7a" target="_blank" class="block app-card p-6 rounded-2xl group"><h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonBlue transition-colors">AIlabs V2 (Legacy)</h3><p class="text-xs text-gray-200 font-medium">Previous version.</p></a>
+                    <a href="https://bangpro-toolkit.vercel.app/" target="_blank" class="block app-card p-6 rounded-2xl group border-dashed border border-gray-600 hover:border-neonBlue/50"><h3 class="text-xl font-bold text-neonBlue mb-2 group-hover:drop-shadow-[0_0_5px_#00ffd5] transition-all">🌐 Bang Pro Toolkit</h3><p class="text-xs text-gray-200 font-medium">Akses member gratis.</p></a>
+                </div>
+            </div>
+
+            <!-- TAB CONTENT: TUTORIAL (DENGAN KATA COMING SOON) -->
+            <div id="content-tutorial" class="hidden">
+                <div class="mb-10 flex items-center gap-4">
+                    <h2 class="text-3xl font-tech font-bold text-white tracking-[0.2em] drop-shadow-[0_0_12px_rgba(255,153,0,0.6)]">GUDANG <span class="text-neonOrange">TUTORIAL</span></h2>
+                    <div class="h-[2px] flex-1 bg-gradient-to-r from-neonOrange/50 to-transparent"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                    <div class="tutorial-card p-6 rounded-2xl flex flex-col justify-between h-full shadow-lg relative overflow-hidden group">
+                        <div>
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="p-2 bg-neonOrange/20 rounded text-neonOrange"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+                                <h3 class="text-xl font-bold text-white font-tech">Desain Cover AI</h3>
+                            </div>
+                            <p class="text-sm text-gray-300 mb-6 leading-relaxed">Panduan pembuatan cover profesional dengan AIlabs Studio Pro. Pelajari teknik komposisi dan penempatan elemen visual.</p>
+                        </div>
+                        <div class="flex flex-col gap-3">
+                            <span class="text-neonOrange font-bold font-tech text-xs tracking-widest text-center animate-pulse border border-neonOrange/30 py-1 rounded bg-black/40 uppercase">Coming Soon</span>
+                            <button disabled class="btn-cyber py-3 rounded-xl flex items-center justify-center gap-2 opacity-30 cursor-not-allowed"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>WATCH VIDEO</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB CONTENT: PROMPT FRAMEWORK (DENGAN KATA COMING SOON) -->
+            <div id="content-framework" class="hidden">
+                <div class="mb-10 flex items-center gap-4">
+                    <h2 class="text-3xl font-tech font-bold text-white tracking-[0.2em] drop-shadow-[0_0_12px_rgba(124, 58, 237, 0.6)]">PROMPT <span class="text-accentPurple text-white">FRAMEWORK</span></h2>
+                    <div class="h-[2px] flex-1 bg-gradient-to-r from-accentPurple to-transparent"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                    <!-- Framework Card 1 -->
+                    <div class="framework-card p-6 rounded-2xl flex flex-col justify-between h-full shadow-lg relative overflow-hidden group border-neonBlue/30">
+                        <div>
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="p-2 bg-neonBlue/20 rounded text-neonBlue"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                                <h3 class="text-xl font-bold text-white font-tech">Motion Prompt</h3>
+                            </div>
+                            <p class="text-sm text-gray-300 mb-4 leading-relaxed">Framework dasar untuk menghidupkan gambar (Image-to-Video). Gunakan parameter gerak spesifik untuk hasil cinematic.</p>
+                            <div class="bg-black/40 p-4 rounded border border-white/10 font-mono text-xs text-neonBlue mb-4 overflow-x-auto">[Input Image] + "cinematic motion, slow pan left..."</div>
+                        </div>
+                        <div class="flex flex-col gap-3">
+                            <span class="text-neonOrange font-bold font-tech text-xs tracking-widest text-center animate-pulse border border-neonOrange/30 py-1 rounded bg-black/40 uppercase">Coming Soon</span>
+                            <button disabled class="btn-cyber py-2 rounded-lg text-xs opacity-30 cursor-not-allowed border-neonBlue/40 text-neonBlue">COPY FRAMEWORK</button>
+                        </div>
+                    </div>
+
+                    <!-- Framework Card 2 -->
+                    <div class="framework-card p-6 rounded-2xl flex flex-col justify-between h-full shadow-lg relative overflow-hidden group border-neonBlue/30">
+                        <div>
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="p-2 bg-neonBlue/20 rounded text-neonBlue"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+                                <h3 class="text-xl font-bold text-white font-tech">Char Reference</h3>
+                            </div>
+                            <p class="text-sm text-gray-300 mb-4 leading-relaxed">Menjaga konsistensi wajah/karakter dari gambar input ke hasil output gambar baru di berbagai adegan.</p>
+                            <div class="bg-black/40 p-4 rounded border border-white/10 font-mono text-xs text-neonBlue mb-4 overflow-x-auto">[Ref Image] + "same character, ultra realistic..."</div>
+                        </div>
+                        <div class="flex flex-col gap-3">
+                            <span class="text-neonOrange font-bold font-tech text-xs tracking-widest text-center animate-pulse border border-neonOrange/30 py-1 rounded bg-black/40 uppercase">Coming Soon</span>
+                            <button disabled class="btn-cyber py-2 rounded-lg text-xs opacity-30 cursor-not-allowed border-neonBlue/40 text-neonBlue">COPY FRAMEWORK</button>
+                        </div>
+                    </div>
+
+                    <!-- Framework Card 3 -->
+                    <div class="framework-card p-6 rounded-2xl flex flex-col justify-between h-full shadow-lg relative overflow-hidden group border-neonBlue/30">
+                        <div>
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="p-2 bg-neonBlue/20 rounded text-neonBlue"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div>
+                                <h3 class="text-xl font-bold text-white font-tech">Style Transfer</h3>
+                            </div>
+                            <p class="text-sm text-gray-300 mb-4 leading-relaxed">Mengambil estetika visual/warna dari gambar input dan menerapkannya pada konsep atau prompt baru.</p>
+                            <div class="bg-black/40 p-4 rounded border border-white/10 font-mono text-xs text-neonBlue mb-4 overflow-x-auto">[Style Image] + "in the style of [Subject]..."</div>
+                        </div>
+                        <div class="flex flex-col gap-3">
+                            <span class="text-neonOrange font-bold font-tech text-xs tracking-widest text-center animate-pulse border border-neonOrange/30 py-1 rounded bg-black/40 uppercase">Coming Soon</span>
+                            <button disabled class="btn-cyber py-2 rounded-lg text-xs opacity-30 cursor-not-allowed border-neonBlue/40 text-neonBlue">COPY FRAMEWORK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="border-t border-white/10 pt-8 mt-12">
+                <div class="info-box p-6 mb-8 rounded-r-xl">
+                    <h3 class="mb-4 font-tech tracking-wide uppercase text-neonBlue font-bold drop-shadow-[0_0_5px_rgba(0,255,213,0.5)]">⚠ CATATAN</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-200">
-                        <div class="space-y-3">
-                            <p class="flex items-start gap-3"><span class="text-neonBlue text-lg">•</span> <span class="drop-shadow-md">Pastikan status <span class="text-neonOrange font-bold">VIP</span> selalu aktif dan berlangganan.</span></p>
-                            <p class="flex items-start gap-3"><span class="text-neonBlue text-lg">•</span> <span class="drop-shadow-md">Perbarui aplikasi secara berkala untuk tools terbaru & kualitas maksimal.</span></p>
-                            <p class="flex items-start gap-3"><span class="text-neonBlue text-lg">•</span> <span class="drop-shadow-md">Fitur otomatis: <strong class="text-neonBlue">Smart Rendering</strong>, <strong class="text-neonBlue">Auto Enhancer</strong>, <strong class="text-neonBlue">Voice Assist</strong>.</span></p>
-                        </div>
-                        <div class="space-y-3">
-                            <p class="flex items-start gap-3"><span class="text-neonBlue text-lg">•</span> <span class="drop-shadow-md">Gunakan <strong class="text-neonOrange">Mode Fine-Tune</strong> atau <strong class="text-neonOrange">Manual Override</strong> untuk kontrol penuh.</span></p>
-                            <p class="flex items-start gap-3"><span class="text-neonBlue text-lg">•</span> <span class="drop-shadow-md">Anda prioritas utama — gunakan <strong class="text-white border-b border-neonBlue">VIP Support</strong> kapan saja.</span></p>
-                        </div>
+                        <p class="flex items-start gap-2 drop-shadow-md"><span>•</span> <span>Pastikan status <strong class="text-neonOrange">VIP</strong> selalu aktif.</span></p>
+                        <p class="flex items-start gap-2 drop-shadow-md"><span>•</span> <span>Buka tab <strong class="text-neonOrange font-bold">Tutorial</strong> atau <strong class="text-accentPurple font-bold">Framework</strong> untuk panduan sistem.</span></p>
                     </div>
                 </div>
-
                 <div class="text-center md:text-left">
-                    <p class="text-neonBlue font-tech text-sm md:text-base uppercase tracking-widest mb-1 drop-shadow-sm">
-                        ★ Tetap Aktif. Tetap Update. Tetap Prime.
-                    </p>
-                    <p class="text-white font-bold text-lg font-sans drop-shadow-md">
-                        <span class="text-neonOrange">AILABS VIP Prime Access</span> — Unlock What Others Can’t.
-                    </p>
+                    <p class="text-neonBlue font-tech text-xs uppercase tracking-widest mb-1 drop-shadow-sm">★ Tetap Aktif. Tetap Update. Tetap Prime.</p>
+                    <p class="text-white font-bold text-lg font-sans drop-shadow-md"><span class="text-neonOrange">AILABS VIP Prime Access</span> — Unlock What Others Can’t.</p>
                     <p class="text-gray-400 text-sm mt-2 italic drop-shadow-md">~ Salam dari Bang Pro</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 3. FLOATING SUPPORT BUTTON & MODAL -->
-    <button id="admin-help-button" title="Open Support Channel" 
-            class="fixed bottom-8 right-8 z-50 group">
-        <div class="absolute inset-0 bg-[#00ff88] rounded-full blur opacity-40 group-hover:opacity-70 transition-opacity duration-300 animate-pulse"></div>
-        <div class="relative bg-black/40 border border-[#00ff88] text-[#00ff88] hover:bg-[#00ff88] hover:text-black rounded-full p-4 transition-all duration-300 shadow-[0_0_15px_rgba(0,255,136,0.3)] backdrop-blur-md">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        </div>
-    </button>
-
-    <div id="admin-help-modal" class="hidden fixed inset-0 z-[60]">
-        <div id="admin-modal-overlay" class="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity"></div>
-        <div class="relative z-10 w-full max-w-md p-4 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <div class="bg-black/40 border border-neonBlue/30 rounded-lg shadow-[0_0_50px_rgba(0,255,213,0.15)] overflow-hidden backdrop-blur-xl">
-                <div class="p-5 border-b border-white/10 bg-white/5 flex justify-between items-center">
-                    <div>
-                        <h3 class="text-lg font-bold text-white font-tech tracking-wide drop-shadow-md">SYSTEM SUPPORT</h3>
-                        <p class="text-[10px] text-neonBlue uppercase tracking-wider drop-shadow-[0_0_5px_#00ffd5]">Encrypted Channel</p>
-                    </div>
-                    <button id="close-admin-modal" class="text-gray-400 hover:text-white transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-                    </button>
-                </div>
-                <div class="p-6 space-y-3">
-                    <a href="https://wa.me/6281274038300" target="_blank" class="flex items-center gap-4 p-3 rounded border border-white/5 hover:border-neonBlue/50 hover:bg-neonBlue/10 transition group backdrop-blur-sm">
-                        <div class="w-8 h-8 rounded bg-green-900/40 flex items-center justify-center text-green-400 text-xs font-mono border border-green-500/30 shadow-[0_0_5px_rgba(34,197,94,0.3)]">OP1</div>
-                        <div><p class="font-bold text-gray-200 text-sm group-hover:text-neonBlue">Wiwik Apriyati</p><p class="text-[10px] text-gray-500">Active Now</p></div>
-                    </a>
-                    <a href="https://wa.me/6282324865269" target="_blank" class="flex items-center gap-4 p-3 rounded border border-white/5 hover:border-neonBlue/50 hover:bg-neonBlue/10 transition group backdrop-blur-sm">
-                        <div class="w-8 h-8 rounded bg-green-900/40 flex items-center justify-center text-green-400 text-xs font-mono border border-green-500/30 shadow-[0_0_5px_rgba(34,197,94,0.3)]">OP2</div>
-                        <div><p class="font-bold text-gray-200 text-sm group-hover:text-neonBlue">Novika YS</p><p class="text-[10px] text-gray-500">Active Now</p></div>
-                    </a>
-                    <a href="https://wa.me/6285799231560" target="_blank" class="flex items-center gap-4 p-3 rounded border border-white/5 hover:border-neonBlue/50 hover:bg-neonBlue/10 transition group backdrop-blur-sm">
-                        <div class="w-8 h-8 rounded bg-blue-900/40 flex items-center justify-center text-blue-400 text-xs font-mono border border-blue-500/30 shadow-[0_0_5px_rgba(59,130,246,0.3)]">BIL</div>
-                        <div><p class="font-bold text-gray-200 text-sm group-hover:text-neonBlue">Naomy</p><p class="text-[10px] text-gray-500">Billing Dept</p></div>
-                    </a>
-                    <a href="https://wa.me/6281358494288" target="_blank" class="flex items-center gap-4 p-3 rounded border border-white/5 hover:border-neonBlue/50 hover:bg-neonBlue/10 transition group backdrop-blur-sm">
-                        <div class="w-8 h-8 rounded bg-orange-900/40 flex items-center justify-center text-orange-400 text-xs font-mono border border-orange-500/30 shadow-[0_0_5px_rgba(249,115,22,0.3)]">TEC</div>
-                        <div><p class="font-bold text-gray-200 text-sm group-hover:text-neonBlue">Miss Purniwati</p><p class="text-[10px] text-gray-500">Tech Support</p></div>
-                    </a>
-                    <!-- Kontak Baru: Melya (Updated Color: Pink -> Purple) -->
-                    <a href="https://wa.me/6285764215523" target="_blank" class="flex items-center gap-4 p-3 rounded border border-white/5 hover:border-neonBlue/50 hover:bg-neonBlue/10 transition group backdrop-blur-sm">
-                        <div class="w-8 h-8 rounded bg-violet-900/40 flex items-center justify-center text-violet-400 text-xs font-mono border border-violet-500/30 shadow-[0_0_5px_rgba(139,92,246,0.3)]">OP3</div>
-                        <div><p class="font-bold text-gray-200 text-sm group-hover:text-neonBlue">Melya</p><p class="text-[10px] text-gray-500">Active Now</p></div>
-                    </a>
-                </div>
+    <!-- WELCOME MODAL POPUP -->
+    <div id="welcome-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-md"></div>
+        <div class="relative glass-panel rounded-3xl p-8 max-w-lg w-full text-center border-t-2 border-neonBlue overflow-hidden">
+            <div class="mb-6 inline-flex p-4 rounded-full bg-neonBlue/10 text-neonBlue border border-neonBlue/30 shadow-[0_0_20px_rgba(0,255,213,0.3)]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+            </div>
+            <h2 class="text-2xl md:text-3xl font-tech font-bold text-white mb-4 uppercase tracking-wide drop-shadow-[0_0_10px_rgba(0,255,213,0.5)]">Selamat Datang di AILabs 👋</h2>
+            <div class="space-y-4 text-gray-200 font-medium leading-relaxed drop-shadow-md">
+                <p>Terima kasih telah menjadi bagian dari komunitas kami.</p>
+                <p class="text-neonBlue font-bold">Mari terus bereksplorasi, bertumbuh, dan menghadirkan hal-hal positif bersama.</p>
+            </div>
+            <div class="mt-8">
+                <button id="close-welcome-modal" class="btn-cyber w-full py-4 rounded-xl shadow-xl">Mulai Eksplorasi</button>
             </div>
         </div>
     </div>
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        const userDatabase = {
-            "bangpro": [
-                "8F4K", "L1P9", "A7B0", "Z3H5", "Q6J2", "T9R8", "E5Y1", "W4I7", "U2O6", "P0D3",
-                "S5G4", "V7K9", "C2N1", "X8M0", "B3L6", "M9H2", "F6J8", "G1R5", "I4T7", "N0Y3",
-                "K7U2", "R8P6", "Y3D9", "H5S1", "O4W7", "D9G0", "J2Z5", "2K8F", "6L1A", "1N4Q",
-                "5T7W", "0E2U", "3P8O", "7S3C", "9V6X", "4B9M", "R1J7", "Y6H3", "O2S9", "D5W0",
-                "K8Z4", "T3F1", "I7G6", "P4N2", "U0B8", "W9V5", "E6C3", "M2X0", "C8L7", "G4Q9",
-                "5J1P", "Z8K4", "7G3B", "C0X9", "R2Y5", "V6T1", "9E4H", "F3S7", "Q0L6", "I8W2",
-                "4D9N", "B5M0", "U1A7", "O3F8", "6H2V", "T9G5", "K4Z1", "Y7R3", "P2C9", "E0J4",
-                "8V6M", "1S9L", "3B7K", "N5W0", "M2Q8", "G1P3", "J4R9", "A6E2", "X0Y7", "L7D5",
-                "S8I1", "F4T0", "H2B6", "W9O4", "Z5U3", "V1K8", "C3N7", "R6J2", "E9G4", "T5Q1",
-                "Y0F9", "B7P5", "I2X3", "K8A0", "O4L6", "U3M7", "D9S2", "G5H1", "N0C8", "M1W4",
-                "admin123"
-            ]
-        };
+        const userDatabase = { "bangpro": ["8F4K", "L1P9", "A7B0", "Z3H5", "Q6J2", "T9R8", "E5Y1", "W4I7", "U2O6", "P0D3", "S5G4", "V7K9", "C2N1", "X8M0", "B3L6", "M9H2", "F6J8", "G1R5", "I4T7", "N0Y3", "K7U2", "R8P6", "Y3D9", "H5S1", "O4W7", "D9G0", "J2Z5", "2K8F", "6L1A", "1N4Q", "5T7W", "0E2U", "3P8O", "7S3C", "9V6X", "4B9M", "R1J7", "Y6H3", "O2S9", "D5W0", "K8Z4", "T3F1", "I7G6", "P4N2", "U0B8", "W9V5", "E6C3", "M2X0", "C8L7", "G4Q9", "5J1P", "Z8K4", "7G3B", "C0X9", "R2Y5", "V6T1", "9E4H", "F3S7", "Q0L6", "I8W2", "4D9N", "B5M0", "U1A7", "O3F8", "6H2V", "T9G5", "K4Z1", "Y7R3", "P2C9", "E0J4", "8V6M", "1S9L", "3B7K", "N5W0", "M2Q8", "G1P3", "J4R9", "A6E2", "X0Y7", "L7D5", "S8I1", "F4T0", "H2B6", "W9O4", "Z5U3", "V1K8", "C3N7", "R6J2", "E9G4", "T5Q1", "Y0F9", "B7P5", "I2X3", "K8A0", "O4L6", "U3M7", "D9S2", "G5H1", "N0C8", "M1W4", "admin123"] };
 
         const loginPage = document.getElementById('login-page');
         const portalPage = document.getElementById('portal-page');
+        const welcomeModal = document.getElementById('welcome-modal');
         const loginForm = document.getElementById('login-form');
-        const logoutButton = document.getElementById('logout-button');
-        const errorMessage = document.getElementById('error-message');
         const passwordInput = document.getElementById('password');
-        const toggleButton = document.getElementById('toggle-password');
-        const eyeOffIcon = document.getElementById('eye-off-icon');
-        const eyeOnIcon = document.getElementById('eye-on-icon');
-        const adminHelpButton = document.getElementById('admin-help-button');
-        const adminHelpModal = document.getElementById('admin-help-modal');
-        const closeAdminModal = document.getElementById('close-admin-modal');
-        const adminModalOverlay = document.getElementById('admin-modal-overlay');
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const sessionToken = localStorage.getItem('sessionToken');
-            if (sessionToken && userDatabase['bangpro'].includes(sessionToken)) {
-                showPortalPage("bangpro");
+        function switchTab(tab) {
+            const appsView = document.getElementById('content-apps');
+            const tutorialView = document.getElementById('content-tutorial');
+            const frameworkView = document.getElementById('content-framework');
+            const tabAppsBtn = document.getElementById('tab-apps');
+            const tabTutorialBtn = document.getElementById('tab-tutorial');
+            const tabFrameworkBtn = document.getElementById('tab-framework');
+
+            // Reset all
+            appsView.classList.add('hidden');
+            tutorialView.classList.add('hidden');
+            frameworkView.classList.add('hidden');
+            tabAppsBtn.classList.remove('active');
+            tabTutorialBtn.classList.remove('active');
+            tabFrameworkBtn.classList.remove('active');
+
+            // Switch
+            if (tab === 'apps') {
+                appsView.classList.remove('hidden');
+                tabAppsBtn.classList.add('active');
+            } else if (tab === 'tutorial') {
+                tutorialView.classList.remove('hidden');
+                tabTutorialBtn.classList.add('active');
+            } else if (tab === 'framework') {
+                frameworkView.classList.remove('hidden');
+                tabFrameworkBtn.classList.add('active');
             }
-        });
-
-        function showPortalPage(username) {
-            loginPage.classList.add('hidden');
-            portalPage.classList.remove('hidden');
-            initFakeOnlineCounter();
-        }
-
-        function showLoginPage() {
-            localStorage.removeItem('sessionToken');
-            portalPage.classList.add('hidden');
-            loginPage.classList.remove('hidden');
-            document.getElementById('password').value = '';
-            errorMessage.textContent = '';
-        }
-
-        // --- NEW: SIMULASI LIVE USER COUNTER (3 SERVERS) ---
-        function initFakeOnlineCounter() {
-            const srv1Span = document.getElementById('srv1-count');
-            const srv2Span = document.getElementById('srv2-count');
-            const srv3Span = document.getElementById('srv3-count');
-            
-            if(!srv1Span || !srv2Span || !srv3Span) return; 
-
-            const animateValue = (element, value) => {
-                if (element.innerText != value) {
-                    element.classList.remove('tick-anim'); 
-                    void element.offsetWidth; 
-                    element.innerText = value;
-                    element.classList.add('tick-anim');
-                }
-            };
-
-            // Initial Values
-            let srv1 = Math.floor(Math.random() * (15 - 5 + 1) + 5); 
-            let srv2 = Math.floor(Math.random() * (20 - 8 + 1) + 8); 
-            let srv3 = Math.floor(Math.random() * (12 - 4 + 1) + 4); 
-            
-            const updateDisplay = () => {
-                animateValue(srv1Span, srv1);
-                animateValue(srv2Span, srv2);
-                animateValue(srv3Span, srv3);
-            };
-
-            updateDisplay();
-
-            setInterval(() => {
-                const target = Math.floor(Math.random() * 3);
-                const change = Math.floor(Math.random() * 3) - 1; 
-
-                if (target === 0) srv1 += change;
-                else if (target === 1) srv2 += change;
-                else srv3 += change;
-
-                if (srv1 < 3) srv1 = 3; if (srv1 > 30) srv1 = 30;
-                if (srv2 < 5) srv2 = 5; if (srv2 > 40) srv2 = 40;
-                if (srv3 < 2) srv3 = 2; if (srv3 > 25) srv3 = 25;
-
-                updateDisplay();
-            }, 4000); 
         }
 
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const username = "bangpro"; 
-            const password = document.getElementById('password').value.trim();
-            if (userDatabase.hasOwnProperty(username) && userDatabase[username].includes(password)) {
-                localStorage.setItem('sessionToken', password);
-                showPortalPage(username);
+            const pass = passwordInput.value.trim();
+            if (userDatabase["bangpro"].includes(pass)) {
+                localStorage.setItem('sessionToken', pass);
+                loginPage.classList.add('hidden');
+                portalPage.classList.remove('hidden');
+                welcomeModal.classList.remove('hidden');
+                initFakeOnlineCounter();
             } else {
-                errorMessage.textContent = 'ACCESS DENIED: INVALID TOKEN'; 
+                document.getElementById('error-message').textContent = 'ACCESS DENIED: INVALID TOKEN';
             }
         });
-        
-        logoutButton.addEventListener('click', () => {
-            showLoginPage();
+
+        document.getElementById('logout-button').addEventListener('click', () => {
+            localStorage.removeItem('sessionToken');
+            location.reload();
         });
 
-        if (toggleButton && passwordInput) {
-            toggleButton.addEventListener('click', () => {
-                const isPassword = passwordInput.getAttribute('type') === 'password';
-                passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
-                eyeOffIcon.classList.toggle('hidden', !isPassword);
-                eyeOnIcon.classList.toggle('hidden', isPassword);
-            });
+        document.getElementById('close-welcome-modal').addEventListener('click', () => {
+            welcomeModal.classList.add('hidden');
+        });
+
+        function initFakeOnlineCounter() {
+            const srv1 = document.getElementById('srv1-count');
+            const srv2 = document.getElementById('srv2-count');
+            const srv3 = document.getElementById('srv3-count');
+            if(!srv1) return;
+            const update = (el, val) => { el.innerText = val; };
+            update(srv1, Math.floor(Math.random()*10)+5);
+            update(srv2, Math.floor(Math.random()*15)+8);
+            update(srv3, Math.floor(Math.random()*8)+4);
         }
 
-        if (adminHelpButton && adminHelpModal && closeAdminModal && adminModalOverlay) {
-            adminHelpButton.addEventListener('click', () => {
-                adminHelpModal.classList.remove('hidden');
-            });
-            closeAdminModal.addEventListener('click', () => {
-                adminHelpModal.classList.add('hidden');
-            });
-            adminModalOverlay.addEventListener('click', () => {
-                adminHelpModal.classList.add('hidden');
-            });
-        }
+        // Auto login check
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('sessionToken');
+            if (token && userDatabase['bangpro'].includes(token)) {
+                loginPage.classList.add('hidden');
+                portalPage.classList.remove('hidden');
+                initFakeOnlineCounter();
+            }
+        });
+
+        document.getElementById('toggle-password').addEventListener('click', () => {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            document.getElementById('eye-off-icon').classList.toggle('hidden');
+            document.getElementById('eye-on-icon').classList.toggle('hidden');
+        });
     </script>
 </body>
 </html>
